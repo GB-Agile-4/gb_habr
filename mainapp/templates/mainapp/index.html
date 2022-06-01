@@ -1,441 +1,63 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Habr</title>
-<!--    <link rel="stylesheet" href="css/styles.css">-->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<div class="wrapper">
-    <header class="header">
-        <div class="container">
-            <div class="header-links">
-                <a href="/" class="header-logo">Хабр</a>
-                <a href="#" class="header-link-bordered">Как стать автором</a>
-            </div>
-        </div>
-    </header>
-    <!--"Липкое" меню-->
-    <div class="main-menu-wrapper">
-        <div class="container">
-            <div class="main-menu-container">
-                <!--Тематическое меню-->
-                <nav class="main-menu">
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--Контент страницы-->
+    <article class="content">
+        {% block content_topsection %}
+            <section class="top-section">
+                <div class="section-name">
+                    <h1>Все потоки</h1>
+                </div>
+                <div class="tabs-wrapper">
                     <ul>
-                        <li><a href="/" class="main-menu-item main-menu-item-hover menu-item-active">Все потоки</a></li>
-                        <li><a href="/" class="main-menu-item main-menu-item-hover">Разработка</a></li>
-                        <li><a href="/" class="main-menu-item main-menu-item-hover">Администрирование</a></li>
-                        <li><a href="/" class="main-menu-item main-menu-item-hover">Дизайн</a></li>
-                        <li><a href="/" class="main-menu-item main-menu-item-hover">Менеджмент</a></li>
-                        <li><a href="/" class="main-menu-item main-menu-item-hover">Маркетинг</a></li>
-                        <li><a href="/" class="main-menu-item main-menu-item-hover">Научпоп</a></li>
+                        <li class="tab-item"><a href="" class="tab-active">Статьи</a></li>
+                        <li class="tab-item"><a href="">Новости</a></li>
+                        <li class="tab-item"><a href="">Хабы</a></li>
+                        <li class="tab-item"><a href="">Авторы</a></li>
+                        <li class="tab-item"><a href="">Компании</a></li>
                     </ul>
-                </nav>
-                <!--Поиск и пользовательское меню-->
-                <nav class="main-user-bar">
-                    <!--TODO: -->
-                    <!-- svg-->
-                    <a href="" class="main-user-item main-menu-item-hover">search</a>
-                    <div class="user-dropdown">
-                        <!--TODO: выпадающее меню-->
-                        <!-- svg-->
-                        <!--<span class="main-user-item main-menu-item-hover">user</span>-->
-                        <a href="" class="main-user-item main-menu-item-hover">login</a>
-                        <a href="" class="main-user-item main-menu-item-hover">registration</a>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <main class="main">
-        <div class="container">
-            <!--Контент страницы-->
-            <article class="content">
-                <section class="top-section">
-                    <div class="section-name">
-                        <h1>Все потоки</h1>
-                    </div>
-                    <div class="tabs-wrapper">
-                        <ul>
-                            <li class="tab-item"><a href="" class="tab-active">Статьи</a></li>
-                            <li class="tab-item"><a href="">Новости</a></li>
-                            <li class="tab-item"><a href="">Хабы</a></li>
-                            <li class="tab-item"><a href="">Авторы</a></li>
-                            <li class="tab-item"><a href="">Компании</a></li>
-                        </ul>
-                    </div>
-                    <div class="button-wrapper">
-                        <!--TODO: выпадающее меню-->
-                        <button type="button" class="spoiler">Все подряд</button>
-                    </div>
-                </section>
-                <!--Обёртка для статей в ленте-->
-                <div class="articles-list">
-                    <article id="1" class="articles-list-item">
-                        <div class="article-snippet">
-                            <div class="article-snippet-meta">
-                                <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
-                                <a href="" class="article-snippet-author">А.С.Пушкин</a>
-                                <span class="article-snippet-published">
+                </div>
+                <div class="button-wrapper">
+                    <!--TODO: выпадающее меню-->
+                    <button type="button" class="spoiler">Все подряд</button>
+                </div>
+            </section>
+        {% endblock %}
+        {% block feed %}
+            <!--Обёртка для статей в ленте-->
+            <div class="articles-list">
+                <article id="1" class="articles-list-item">
+                    <div class="article-snippet">
+                        <div class="article-snippet-meta">
+                            <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
+                            <a href="" class="article-snippet-author">А.С.Пушкин</a>
+                            <span class="article-snippet-published">
                                     <time datetime="2022-05-27T21:23:45.000Z" title="Вставить МСК время">Время публикации</time>
                                 </span>
-                            </div>
-                            <h2 class="article-snippet-title">
-                                <a href="" class="article-snippet-title-link">Я Вам пишу... Чего же боле?</a>
-                            </h2>
                         </div>
-                        <div class="article-icons">
-                            <!--TODO: допилить иконки-->
-                            <div>
-                                <div class="votes-meter">Голоса</div>
-                            </div>
-                            <div><span class="icon-counter" title="Количество просмотров">Просмотры</span></div>
-                            <div>
-                                <button title="Добавить в закладки">В закладки</button>
-                            </div>
-                            <div>
-                                <div class="comments-counter-link" title="Читать комментарии">Комменты</div>
-                            </div>
+                        <h2 class="article-snippet-title">
+                            <a href="" class="article-snippet-title-link">Я Вам пишу... Чего же боле?</a>
+                        </h2>
+                    </div>
+                    <div class="article-icons">
+                        <!--TODO: допилить иконки-->
+                        <div>
+                            <div class="votes-meter">Голоса</div>
                         </div>
-                    </article>
-                </div>
-            </article>
-            <!--Боковое меню-->
-            <aside class="side-box">
-                <!--TODO: допилить "липкость" в оба конца. JS?-->
-                <div class="sticky-container">
-                    <div class="side-item">
-                        <header class="side-item-header">
-                            <h2 class="side-item-header-title">Читают сейчас</h2>
-                        </header>
-                        <div class="block-body">
-                            <ul>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                            </ul>
+                        <div><span class="icon-counter" title="Количество просмотров">Просмотры</span></div>
+                        <div>
+                            <button title="Добавить в закладки">В закладки</button>
                         </div>
-                        <footer class="side-item-footer"></footer>
-                    </div>
-                    <div class="side-item">
-                        <header class="side-item-header">
-                            <h2 class="side-item-header-title">Читают сейчас</h2>
-                        </header>
-                        <div class="block-body">
-                            <ul>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="block-item">
-                                    <article>
-                                        <h2>
-                                            <a href="" class="side-item-body-title">Lorem ipsum dolor sit amet,
-                                                consectetur adipisicing elit. Minima, quae!</a>
-                                        </h2>
-                                        <div class="block-icons icons-item">
-                                            <div class="item-counter">
-                                                <!-- <svg class="counter-icon"></svg>-->
-                                                <div class="counter-icon" title="Просмотры">svg</div>
-                                                <span class="item-counter-value"
-                                                      title="Количество просмотров">162K</span>
-                                            </div>
-                                            <div class="item-comments-counter icons-item">
-                                                <div class="item-comments">
-                                                    <a href="">
-                                                        <!-- <svg class="counter-icon"></svg>-->
-                                                        <div class="counter-icon" title="Читать комментарии">svg</div>
-                                                        <span class="item-counter-value"
-                                                              title="Количество комментариев">24</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                            </ul>
+                        <div>
+                            <div class="comments-counter-link" title="Читать комментарии">Комменты</div>
                         </div>
-                        <footer class="side-item-footer"></footer>
                     </div>
-                </div>
-            </aside>
-        </div>
-    </main>
-    <footer>
-        <div class="footer-menu-box">
-            <div class="container">
-                <div class="footer-menu">
-                    <div class="footer-menu-card">
-                        <h3 class="footer-card-title">Ваш аккаунт</h3>
-                        <ul class="footer-card-content">
-                            <li><a href="" class="footer-card-item">Войти</a></li>
-                            <li><a href="" class="footer-card-item">Регистрация</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-menu-card">
-                        <h3 class="footer-card-title">Разделы</h3>
-                        <ul class="footer-card-content">
-                            <li><a href="" class="footer-card-item">Публикации</a></li>
-                            <li><a href="" class="footer-card-item">Новости</a></li>
-                            <li><a href="" class="footer-card-item">Хабы</a></li>
-                            <li><a href="" class="footer-card-item">Компании</a></li>
-                            <li><a href="" class="footer-card-item">Авторы</a></li>
-                            <li><a href="" class="footer-card-item">Песочница</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-menu-card">
-                        <h3 class="footer-card-title">Информация</h3>
-                        <ul class="footer-card-content">
-                            <li><a href="" class="footer-card-item">Устройство сайта</a></li>
-                            <li><a href="" class="footer-card-item">Для авторов</a></li>
-                            <li><a href="" class="footer-card-item">Для компаний</a></li>
-                            <li><a href="" class="footer-card-item">Документы</a></li>
-                            <li><a href="" class="footer-card-item">Соглашение</a></li>
-                            <li><a href="" class="footer-card-item">Конфиденциальность</a></li>
-                        </ul>
-                    </div>
-                </div>
+                </article>
             </div>
-        </div>
-        <div class="footer">
-            <div class="container">
-                <div class="footer-wrapper">
-                    <span>&copy;&nbsp;2022</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
-</body>
-</html>
+        {% endblock %}
+    </article>
+    {% block sidebox %}
+        {% include 'mainapp/includes/inc_side-box.html' %}
+    {% endblock %}
+{% endblock %}
