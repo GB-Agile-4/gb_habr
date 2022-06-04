@@ -4,7 +4,6 @@ from django.urls import reverse
 from django.contrib import auth
 from authapp.forms import HabrUserLoginForm, HabrUserRegisterForm, HabrUserEditForm, HabrUserProfileEditForm
 from authapp.models import HabrUser
-# from authapp.services import send_verify_email
 
 
 def login(request):
@@ -40,8 +39,7 @@ def register(request):
         register_form = HabrUserRegisterForm(request.POST, request.FILES)
 
         if register_form.is_valid():
-            new_user = register_form.save()
-            # send_verify_email(new_user)
+            register_form.save()
             return HttpResponseRedirect(reverse('index'))
     else:
         register_form = HabrUserRegisterForm()

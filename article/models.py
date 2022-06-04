@@ -2,8 +2,6 @@ from django.db import models
 from mainapp.models import ArticleCategory
 from authapp.models import HabrUser
 
-# NULLABLE = {'null': True, 'blank': True}
-
 
 class Article(models.Model):
     objects = None
@@ -24,7 +22,5 @@ class Article(models.Model):
     def delete(self):
         if self.is_active:
             self.is_active = False
-        else:
-            self.is_active = True
 
         self.save()
