@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     'adminapp',
     'authapp',
     'mainapp',
+    'authapp',
+    'article',
 ]
+
+
+AUTH_USER_MODEL = 'authapp.HabrUser'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -72,7 +78,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'gb_habr.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -80,6 +86,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'gbhabr',
+#         'USER': 'postgres',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
