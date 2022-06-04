@@ -24,8 +24,3 @@ class HabrUserProfile(models.Model):
     @receiver(post_save, sender=HabrUser)
     def update_user_profile(sender, instance, **kwargs):
         instance.habruserprofile.save()
-
-
-from django.db import models
-
-# Create your models here.
