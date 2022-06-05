@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'adminapp',
     'authapp',
     'mainapp',
-    'authapp',
     'article',
 ]
 
