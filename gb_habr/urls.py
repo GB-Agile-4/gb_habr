@@ -22,5 +22,6 @@ urlpatterns = [
     path('', mainapp.index),
     path('admin/', admin.site.urls),
     path('auth/', include('authapp.urls', namespace='auth')),
+    path('user/', include('userapp.urls', namespace='user'))
     # path('article/', include('article.urls', namespace='article')),
 ]
