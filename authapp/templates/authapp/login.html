@@ -6,7 +6,6 @@
         {% csrf_token %}
         {{ login_form.as_p }}
         <input type="submit" class="btn btn-primary" value="Войти">
-        <a class="btn btn-link" href="{% url 'social:begin' 'vk-oauth2' %}?next=/">Вход через VK</a>
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}">
         {% endif %}
