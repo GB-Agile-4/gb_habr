@@ -1,0 +1,59 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pa-page-wrapper">
+    <div class="pa-page-person-date">
+        <p>
+            <img src="{{ user.avatar }}" alt="{{ user.username }}">
+        </p>
+        <p> {{ user.username }}</p>
+        {% if user.first_name%}
+        <p> Имя: {{user.first_name}}</p>
+        {% endif %}
+        {% if user.last_name %}
+        <p> Фамилия: {{user.last_name}}</p>
+        {% endif %}
+        <p>
+                <a class="pa-button-profile" href="{% url 'auth:edit'%}">
+                    Редактировать профиль
+                </a>
+                <a class="pa-button-profile" href="{% url 'auth:logout'%}">
+                    Выйти
+                </a>
+        </p>
+    </div>
+    <div class="pa-page-articles-date">
+        <div style="margin: 20px">
+            <span>Ваши публикации</span>
+            <span>
+                <a class="pa-button-article" href="{% url 'user:create' %}">
+                    Добавить публикацию
+                </a>
+            </span>
+        </div>
+        <hr>
+        <div>
+            {% if articles %}
+            {% for article in articles %}
+            <artical class="articles-list-item">
+                <div class="article-snippet">
+                    <div class="article-snippet-meta">
+                        <span>{{article.created_at}}</span>
+                    </div>
+                    <h2 class="article-snippet-title">
+                        <a href="" class="article-snippet-title-link">{{article.name}}</a>
+                    </h2>
+                    <p> {{article.text}} </p>
+                </div>
+            </artical>
+            {% endfor %}
+            {% else %}
+            <div class="articles-list-item"> У вас пока ещё нет публикаций!</div>
+            {% endif %}
+            </artical>
+
+        </div>
+
+    </div>
+    {% endblock %}
