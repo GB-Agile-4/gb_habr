@@ -4,14 +4,10 @@
             <!--Тематическое меню-->
             <nav class="main-menu">
                 <ul>
-                    <li><a href="/" class="main-menu-item main-menu-item-hover menu-item-active">Все потоки</a>
-                    </li>
-                    <li><a href="/" class="main-menu-item main-menu-item-hover">Разработка</a></li>
-                    <li><a href="/" class="main-menu-item main-menu-item-hover">Администрирование</a></li>
-                    <li><a href="/" class="main-menu-item main-menu-item-hover">Дизайн</a></li>
-                    <li><a href="/" class="main-menu-item main-menu-item-hover">Менеджмент</a></li>
-                    <li><a href="/" class="main-menu-item main-menu-item-hover">Маркетинг</a></li>
-                    <li><a href="/" class="main-menu-item main-menu-item-hover">Научпоп</a></li>
+                    <li><a href="{% url 'content:articles' pk=0 %}" class="main-menu-item main-menu-item-hover menu-item-active">Все потоки</a></li>
+                    {% for category in article_categories %}
+                    <li><a href="{% url 'content:articles' pk=category.pk %}" class="main-menu-item main-menu-item-hover">{{category.name}}</a></li>
+                    {% endfor %}
                 </ul>
             </nav>
             <!--Поиск и пользовательское меню-->
@@ -22,9 +18,16 @@
                 <div class="user-dropdown">
                     <!--TODO: выпадающее меню-->
                     <!-- svg-->
-                    <!--<span class="main-user-item main-menu-item-hover">user</span>-->
-                    <a href="" class="main-user-item main-menu-item-hover">login</a>
-                    <a href="" class="main-user-item main-menu-item-hover">registration</a>
+
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'user:' %}" class="main-user-item main-menu-item-hover">
+                        {{ user.username }}
+                    </a>
+                    <a href=" {% url 'auth:logout' %}" class="main-user-item main-menu-item-hover">logout</a>
+                    {% else %}
+                    <a href=" {% url 'auth:login' %}" class="main-user-item main-menu-item-hover">login</a>
+                    <a href=" {% url 'auth:register' %}" class="main-user-item main-menu-item-hover">registration</a>
+                    {% endif %}
                 </div>
             </nav>
         </div>
