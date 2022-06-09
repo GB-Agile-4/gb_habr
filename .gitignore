@@ -130,6 +130,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-authapp/migrations
-article/migrations
-mainapp/migrations
+authapp/migrations/
+article/migrations/
+mainapp/migrations/
+adminapp/migrations/
