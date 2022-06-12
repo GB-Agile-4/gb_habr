@@ -1,4 +1,5 @@
 from django.db import models
+
 from mainapp.models import ArticleCategory
 from authapp.models import HabrUser
 
@@ -14,7 +15,6 @@ class Article(models.Model):
     is_archived = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
 
     def __str__(self):
         return f'{self.name} ({self.category.name})'

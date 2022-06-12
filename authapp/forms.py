@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from authapp.models import HabrUser, HabrUserProfile
 from django import forms
+
+from authapp.models import HabrUser, HabrUserProfile
 
 
 class HabrUserLoginForm(AuthenticationForm):
