@@ -2,10 +2,12 @@ from django.core.management.base import BaseCommand
 from mainapp.models import ArticleCategory
 from article.models import Article
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 import json, os
 
+User = get_user_model()
 
 JSON_PATH = 'mainapp/json'
 

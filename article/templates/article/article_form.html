@@ -1,0 +1,40 @@
+{#{% extends 'article/base.html' %}#}
+{#{% load static %}#}
+{##}
+{#{% block content %}#}
+{#<form method="POST" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <input type="submit" value="Опубликовать">#}
+{#</form>#}
+{#{% endblock %}#}
+
+
+{% extends 'article/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--Контент страницы-->
+    <article class="content">
+        {% block feed %}
+            <!--Обёртка для статей в ленте-->
+            <div class="articles-list">
+                <div class="articles-list-item">
+                    <div class="article-snippet">
+                                <div class="article-snippet-meta">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <input type="submit" value="Опубликовать">
+                                    </form>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </article>
+
+
+    {% block sidebox %}
+        {% include 'article/includes/inc_side-box.html' %}
+    {% endblock %}
+{% endblock %}

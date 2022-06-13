@@ -1,0 +1,50 @@
+{% extends 'article/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--Контент страницы-->
+    <article class="content">
+        {% block feed %}
+            <!--Обёртка для статей в ленте-->
+            <div class="articles-list">
+                <div class="articles-list-item">
+                    <div class="article-snippet">
+                                <div class="article-snippet-meta">
+                                    <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
+                                    <a href="" class="article-snippet-author">{{ object.author }}</a>
+                                    <span class="article-snippet-published">
+                                            <time datetime="2022-05-27T21:23:45.000Z" title="Вставить МСК время">{{ object.created_at }}</time>
+                                        </span>
+                                </div>
+                                <h2 class="article-snippet-title"> {{ object.name }}
+                                </h2>
+                                <p> {{ object.text }}</p>
+
+                    </div>
+                    {% if user == object.author %}
+                        <a class="btn" href="/article/edit/{{ object.pk }}">Редактировать</a>
+                    {% endif %}
+
+                    {% if user.is_staff or user == object.author %}
+                        <a class="btn" href="/article/delete/{{ object.pk }}">Удалить</a>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        {% endblock %}
+
+
+        {% block comments %}
+            {% include 'article/includes/inc_article-comments.html' %}
+        {% endblock %}
+
+
+    </article>
+
+
+    {% block sidebox %}
+        {% include 'article/includes/inc_side-box.html' %}
+    {% endblock %}
+{% endblock %}
+

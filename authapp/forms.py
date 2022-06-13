@@ -26,12 +26,12 @@ class HabrUserRegisterForm(UserCreationForm):
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
 
-    def save(self, *args, **kwargs):
-        user = super().save(*args, **kwargs)
-        user.is_active = False
-
-        user.save()
-        return user
+    # def save(self, *args, **kwargs):
+    #     user = super().save(*args, **kwargs)
+    #     user.is_active = False
+    #
+    #     user.save()
+    #     return user
 
 
 class HabrUserEditForm(UserChangeForm):

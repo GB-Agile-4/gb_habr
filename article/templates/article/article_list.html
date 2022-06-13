@@ -1,4 +1,4 @@
-{% extends 'mainapp/base.html' %}
+{% extends 'article/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -27,9 +27,9 @@
         {% block feed %}
             <!--Обёртка для статей в ленте-->
             <div class="articles-list">
-                {% for article in articles %}
-                {% if article.is_active %}
-                <article id={{ article.pk }} class="articles-list-item">
+                {% for article in object_list %}
+                    {% if article.is_active %}
+                    <article id={{ article.pk }} class="articles-list-item">
                     <div class="article-snippet">
                         <div class="article-snippet-meta">
                             <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
@@ -56,13 +56,13 @@
                             <div class="comments-counter-link" title="Читать комментарии">Комменты</div>
                         </div>
                     </div>
-                </article>
-                {% endif %}
+                    </article>
+                    {% endif %}
                 {% endfor %}
             </div>
         {% endblock %}
     </article>
     {% block sidebox %}
-        {% include 'mainapp/includes/inc_side-box.html' %}
+        {% include 'article/includes/inc_side-box.html' %}
     {% endblock %}
 {% endblock %}
