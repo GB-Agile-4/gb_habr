@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
@@ -8,7 +8,6 @@ class HabrUser(AbstractUser):
     avatar = models.ImageField(upload_to='users_avatars', blank=True, verbose_name='Аватар')
     age = models.PositiveSmallIntegerField(verbose_name='Возраст', default=18)
     avatar_url = models.CharField(max_length=128, blank=True, null=True)
-
 
 
 class HabrUserProfile(models.Model):
@@ -20,7 +19,4 @@ class HabrUserProfile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             HabrUserProfile.objects.create(user=instance)
-
-    @receiver(post_save, sender=HabrUser)
-    def update_user_profile(sender, instance, **kwargs):
         instance.habruserprofile.save()
