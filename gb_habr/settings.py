@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mainapp',
     'article',
     'userapp',
+    'searchapp',
 ]
 
 
