@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 
 from mainapp import views as mainapp
+from article import views as article
 
 
 urlpatterns = [
@@ -29,7 +30,8 @@ urlpatterns = [
     path('content/', include('mainapp.urls', namespace='content')),
     path('auth/', include('authapp.urls', namespace='auth')),
     path('user/', include('userapp.urls', namespace='user')),
-    # path('article/', include('article.urls', namespace='article')),
+    path('article/', include(('article.urls', 'article'), namespace='article')),
+
 ]
 
 if settings.DEBUG:

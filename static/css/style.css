@@ -551,3 +551,43 @@ svg {
     background-color: #303b44;
     color: #FFF;
 }
+
+.article-form {
+
+}
+
+.article-blocks__comments {
+    margin-bottom: 12px;
+}
+
+.comments-wrapper__wrapper {
+    background-color: #fff;
+}
+
+.comments-wrapper__title {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: #333;
+    font-size: .875rem;
+    font-weight: 700;
+    margin: 0 auto 0 0;
+}
+
+.comments-wrapper__header {
+    align-items: center;
+    border-bottom: 1px solid #d5dddf;
+    box-sizing: border-box;
+    display: flex;
+    min-height: 55px;
+    padding: 15px 16px;
+}
+
+.comments-wrapper__header h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
