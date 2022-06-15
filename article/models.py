@@ -17,7 +17,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.author} {self.title} ({self.category.name})'
+        return f'{self.title} ({self.category.name}) {self.author} '
 
     def delete(self):
         if self.is_active:
