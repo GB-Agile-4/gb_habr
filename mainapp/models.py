@@ -17,7 +17,5 @@ class ArticleCategory(models.Model):
     def delete(self):
         if self.is_active:
             self.is_active = False
-        else:
-            self.is_active = True
 
         self.save()

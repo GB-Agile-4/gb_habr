@@ -31,6 +31,7 @@ urlpatterns = [
     path('auth/', include('authapp.urls', namespace='auth')),
     path('user/', include('userapp.urls', namespace='user')),
     path('article/', include(('article.urls', 'article'), namespace='article')),
+
 ]
 
 if settings.DEBUG:

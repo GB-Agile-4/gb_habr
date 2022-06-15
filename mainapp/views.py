@@ -6,7 +6,6 @@ from article.models import Article
 
 
 def index(request):
-
     article_categories = ArticleCategory.objects.all()
     articles = Article.objects.all()
 
@@ -14,11 +13,11 @@ def index(request):
         'article_categories': article_categories,
         'articles': articles
     }
+
     return render(request, 'mainapp/index.html', context=context)
 
 
 def articles(request, pk):
-
     article_categories = ArticleCategory.objects.all()
 
     if pk == 0:
@@ -34,11 +33,11 @@ def articles(request, pk):
         'category_item': category_item,
         'articles': articles
     }
+
     return render(request, 'mainapp/index.html', context=context)
 
 
 def news(request):
-
     article_categories = ArticleCategory.objects.all()
 
     context = {
@@ -49,7 +48,6 @@ def news(request):
 
 
 def hubs(request):
-
     article_categories = ArticleCategory.objects.all()
 
     context = {
@@ -59,7 +57,6 @@ def hubs(request):
 
 
 def authors(request):
-
     article_categories = ArticleCategory.objects.all()
 
     context = {
@@ -69,7 +66,6 @@ def authors(request):
 
 
 def companies(request):
-
     article_categories = ArticleCategory.objects.all()
 
     context = {
