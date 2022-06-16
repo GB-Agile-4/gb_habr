@@ -136,3 +136,5 @@ mainapp/migrations/
 adminapp/migrations/
 user/migrations/
 searchapp/migrations/
+
+db.sqlite3

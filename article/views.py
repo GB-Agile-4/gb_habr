@@ -3,7 +3,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DetailView, D
 from django.urls import reverse, reverse_lazy
 
 from .models import Article
-from mainapp.models import ArticleCategory
+from .models import ArticleCategory
 from .forms import ArticleCreateForm
 
 
