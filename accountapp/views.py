@@ -10,9 +10,9 @@ def personal_area(request):
         'articles': articles
     }
 
-    return render(request, 'userapp/personal_area.html', context=context)
+    return render(request, 'accountapp/personal_area.html', context=context)
 
 
 def create_pub(request):
-    return render(request, 'userapp/create_pub.html')
+    return render(request, 'accountapp/create_pub.html')
 

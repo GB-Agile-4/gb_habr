@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('content/', include('mainapp.urls', namespace='content')),
     path('auth/', include('authapp.urls', namespace='auth')),
-    path('user/', include('userapp.urls', namespace='user')),
+    path('user/', include('accountapp.urls', namespace='user')),
     path('article/', include(('article.urls', 'article'), namespace='article')),
 
 ]
