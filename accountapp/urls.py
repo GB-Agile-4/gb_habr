@@ -1,9 +1,9 @@
 from django.urls import path
 
-from userapp import views as userapp
+from accountapp import views as userapp
 
 
-app_name = 'userapp'
+app_name = 'accountapp'
 
 urlpatterns = [
     path('', userapp.personal_area, name=''),

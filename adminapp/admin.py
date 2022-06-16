@@ -1,6 +1,6 @@
 from django.contrib import admin
 from article.models import Article
-from mainapp.models import ArticleCategory
+from article.models import ArticleCategory
 from authapp.models import HabrUser, HabrUserProfile
 
 

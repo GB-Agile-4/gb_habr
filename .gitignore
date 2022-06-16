@@ -134,5 +134,7 @@ authapp/migrations/
 article/migrations/
 mainapp/migrations/
 adminapp/migrations/
-user/migrations/
+accountapp/migrations/
 searchapp/migrations/
+
+db.sqlite3
