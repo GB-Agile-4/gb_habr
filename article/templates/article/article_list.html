@@ -1,4 +1,4 @@
-{% extends 'article/base.html' %}
+{% extends 'mainapp/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -12,10 +12,7 @@
                 <div class="tabs-wrapper">
                     <ul>
                         <li class="tab-item"><a href=" {% url 'content:articles' 0 %}" class="tab-active">Статьи</a></li>
-                        <li class="tab-item"><a href=" {% url 'content:news' %}">Новости</a></li>
                         <li class="tab-item"><a href=" {% url 'content:hubs' %}">Хабы</a></li>
-                        <li class="tab-item"><a href=" {% url 'content:authors' %}" >Авторы</a></li>
-                        <li class="tab-item"><a href=" {% url 'content:companies' %}">Компании</a></li>
                     </ul>
                 </div>
                 <div class="button-wrapper">
