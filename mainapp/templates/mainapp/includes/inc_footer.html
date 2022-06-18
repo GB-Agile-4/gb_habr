@@ -5,19 +5,17 @@
                 <div class="footer-menu-card">
                     <h3 class="footer-card-title">Ваш аккаунт</h3>
                     <ul class="footer-card-content">
-                        <li><a href="" class="footer-card-item">Войти</a></li>
-                        <li><a href="" class="footer-card-item">Регистрация</a></li>
+                        <li>
+                            <a href=" {% url 'auth:login' %}" class="footer-card-item">Войти</a>
+                        </li>
+                        <li><a href="{% url 'auth:register' %}" class="footer-card-item">Регистрация</a></li>
                     </ul>
                 </div>
                 <div class="footer-menu-card">
                     <h3 class="footer-card-title">Разделы</h3>
                     <ul class="footer-card-content">
                         <li><a href="" class="footer-card-item">Публикации</a></li>
-                        <li><a href="" class="footer-card-item">Новости</a></li>
                         <li><a href="" class="footer-card-item">Хабы</a></li>
-                        <li><a href="" class="footer-card-item">Компании</a></li>
-                        <li><a href="" class="footer-card-item">Авторы</a></li>
-                        <li><a href="" class="footer-card-item">Песочница</a></li>
                     </ul>
                 </div>
                 <div class="footer-menu-card">
@@ -25,8 +23,6 @@
                     <ul class="footer-card-content">
                         <li><a href="" class="footer-card-item">Устройство сайта</a></li>
                         <li><a href="" class="footer-card-item">Для авторов</a></li>
-                        <li><a href="" class="footer-card-item">Для компаний</a></li>
-                        <li><a href="" class="footer-card-item">Документы</a></li>
                         <li><a href="" class="footer-card-item">Соглашение</a></li>
                         <li><a href="" class="footer-card-item">Конфиденциальность</a></li>
                     </ul>
