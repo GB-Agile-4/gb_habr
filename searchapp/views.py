@@ -6,7 +6,7 @@ from article.models import Article
 def search(request):
     if request.method == 'POST':
         title = request.POST.get('to_search')
-        articles = Article.objects.filter(title=title)
+        articles = Article.objects.filter(title__contains=title)
 
         context = {'articles': articles}
 
