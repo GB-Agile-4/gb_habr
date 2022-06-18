@@ -14,7 +14,7 @@
             <nav class="main-user-bar">
                 <!--TODO: -->
                 <!-- svg-->
-                <a href="/search" class="main-user-item main-menu-item-hover">search</a>
+                <a href="/search" class="main-user-item main-menu-item-hover">Поиск</a>
                 <div class="user-dropdown">
                     <!--TODO: выпадающее меню-->
                     <!-- svg-->
@@ -24,10 +24,10 @@
                     <a href="{% url 'user:' %}" class="main-user-item main-menu-item-hover">
                         {{ user.username }}
                     </a>
-                    <a href=" {% url 'auth:logout' %}" class="main-user-item main-menu-item-hover">logout</a>
+                    <a href=" {% url 'auth:logout' %}" class="main-user-item main-menu-item-hover">Выйти</a>
                     {% else %}
-                    <a href=" {% url 'auth:login' %}" class="main-user-item main-menu-item-hover">login</a>
-                    <a href=" {% url 'auth:register' %}" class="main-user-item main-menu-item-hover">registration</a>
+                    <a href=" {% url 'auth:login' %}" class="main-user-item main-menu-item-hover">Войти</a>
+                    <a href=" {% url 'auth:register' %}" class="main-user-item main-menu-item-hover">Регистрация</a>
                     {% endif %}
                 </div>
             </nav>
