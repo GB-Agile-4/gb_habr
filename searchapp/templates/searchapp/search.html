@@ -1,0 +1,28 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'search:search' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="to_search" id="">
+        <input type="submit" class="btn btn-primary" value="Найти">
+    </form>
+    <div class="articles-list">
+                {% for article in articles %}
+                    {% if article.is_active %}
+                    <article id={{ article.pk }} class="articles-list-item">
+                    <div class="article-snippet">
+                        <div class="article-snippet-meta">
+                            <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
+                            <a href="" class="article-snippet-author">{{ article.author }}</a>
+                            <a href="/article/{{article.pk}}/" class="article-snippet-author">{{ article.title }}</a>
+                            <span class="article-snippet-published">
+                                <time>{{ article.created_at }}</time>
+                            </span>
+                        </div>
+                    </div>
+                    </article>
+                    {% endif %}
+                {% endfor %}
+    </div>
+{% endblock %}
