@@ -6,10 +6,10 @@ from article.models import Article
 def search(request):
     if request.method == 'POST':
         title = request.POST.get('to_search')
-        articles = Article.objects.filter(title__contains=title)
 
-        context = {'articles': articles}
-
-        return render(request, 'searchapp/search.html', context=context)
+        if title:
+            articles = Article.objects.filter(title__contains=title)
+            context = {'articles': articles}
+            return render(request, 'searchapp/search.html', context=context)
 
     return render(request, 'searchapp/search.html')
