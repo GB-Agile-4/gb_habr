@@ -5,7 +5,7 @@
 <div class="pa-page-wrapper">
     <div class="pa-page-person-date">
         <p>
-            <img src="{{ user.avatar }}" alt="{{ user.username }}">
+            <img src="{{ MEDIA_URL }}{{ user.avatar }}" alt="{{ user.username }}">
         </p>
         <p> {{ user.username }}</p>
         {% if user.first_name%}
