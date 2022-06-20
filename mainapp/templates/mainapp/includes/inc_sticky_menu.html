@@ -4,9 +4,9 @@
             <!--Тематическое меню-->
             <nav class="main-menu">
                 <ul>
-                    <li><a href="{% url 'content:articles' pk=0 %}" class="main-menu-item main-menu-item-hover menu-item-active">Все потоки</a></li>
+                    <li><a href="{% url 'mainapp:articles' pk=0 %}" class="main-menu-item main-menu-item-hover menu-item-active">Все потоки</a></li>
                     {% for category in article_categories %}
-                    <li><a href="{% url 'content:articles' pk=category.pk %}" class="main-menu-item main-menu-item-hover">{{category.name}}</a></li>
+                    <li><a href="{% url 'mainapp:articles' pk=category.pk %}" class="main-menu-item main-menu-item-hover">{{category.name}}</a></li>
                     {% endfor %}
                 </ul>
             </nav>
