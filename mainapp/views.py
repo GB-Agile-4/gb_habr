@@ -37,16 +37,6 @@ def articles(request, pk):
     return render(request, 'mainapp/index.html', context=context)
 
 
-def news(request):
-    article_categories = ArticleCategory.objects.all()
-
-    context = {
-        'article_categories': article_categories
-    }
-
-    return render(request, 'mainapp/news.html', context=context)
-
-
 def hubs(request):
     article_categories = ArticleCategory.objects.all()
 
@@ -56,19 +46,5 @@ def hubs(request):
     return render(request, 'mainapp/hubs.html', context=context)
 
 
-def authors(request):
-    article_categories = ArticleCategory.objects.all()
-
-    context = {
-        'article_categories': article_categories
-    }
-    return render(request, 'mainapp/authors.html', context=context)
-
-
-def companies(request):
-    article_categories = ArticleCategory.objects.all()
-
-    context = {
-        'article_categories': article_categories
-    }
-    return render(request, 'mainapp/companies.html', context=context)
+def help(request):
+    return render(request, 'mainapp/help.html')
