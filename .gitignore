@@ -131,10 +131,8 @@ dmypy.json
 .pyre/
 
 authapp/migrations/
-article/migrations/
+articleapp/migrations/
 mainapp/migrations/
 adminapp/migrations/
 accountapp/migrations/
 searchapp/migrations/
-
-db.sqlite3
