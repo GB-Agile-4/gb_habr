@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'adminapp',
     'authapp',
     'mainapp',
-    'article',
+    'articleapp',
     'accountapp',
     'searchapp',
 ]

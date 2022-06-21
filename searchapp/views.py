@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from article.models import Article
+from articleapp.models import Article
 
 
 def search(request):
