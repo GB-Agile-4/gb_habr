@@ -136,3 +136,4 @@ mainapp/migrations/
 adminapp/migrations/
 accountapp/migrations/
 searchapp/migrations/
+commentapp/migrations/
