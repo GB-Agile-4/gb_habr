@@ -19,7 +19,7 @@ admin.site.register(Article)
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('comment_author', 'article', 'created_at', 'updated_at', 'is_active', 'is_moderated')
+    list_display = ('article', 'comment_author', 'body', 'created_at', 'updated_at', 'is_active', 'is_moderated')
     list_filter = ('is_active', 'created_at', 'updated_at')
     search_fields = ('comment_author', 'body')
 
