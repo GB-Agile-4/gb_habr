@@ -20,7 +20,7 @@
                     <!-- svg-->
 
                     {% if user.is_authenticated %}
-                    <a href="{% url 'articleapp:post' %}" class="main-user-item main-menu-item-hover">Написать</a>
+                    <a href="{% url 'article:post' %}" class="main-user-item main-menu-item-hover">Написать</a>
                     <a href="{% url 'user:' %}" class="main-user-item main-menu-item-hover">
                         {{ user.username }}
                     </a>

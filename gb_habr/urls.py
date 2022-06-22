@@ -12,7 +12,7 @@ urlpatterns = [
     path('', include('mainapp.urls', namespace='mainapp')),
     path('auth/', include('authapp.urls', namespace='auth')),
     path('user/', include('accountapp.urls', namespace='user')),
-    path('articleapp/', include(('articleapp.urls', 'articleapp'), namespace='articleapp')),
+    path('article/', include(('articleapp.urls', 'article'), namespace='article')),
     path('search/', include('searchapp.urls', namespace='search')),
 ]
 
