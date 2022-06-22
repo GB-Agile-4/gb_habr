@@ -43,7 +43,7 @@ class ArticleCreateView(CreateView):
 
 class ArticleDeleteView(DeleteView):
     model = Article
-    success_url = '/article/'
+    success_url = '/articleapp/'
 
 
 class ArticleUpdateView(UpdateView):
