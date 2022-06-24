@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from article.models import Article
+from articleapp.models import Article
 
 
 def personal_area(request):
@@ -15,4 +15,3 @@ def personal_area(request):
 
 def create_pub(request):
     return render(request, 'accountapp/create_pub.html')
-

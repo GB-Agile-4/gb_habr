@@ -12,7 +12,7 @@ class ArticleCategory(models.Model):
 
     class Meta:
         verbose_name = 'категория'
-        verbose_name_plural = 'категории'
+        verbose_name_plural = 'Categories'
         ordering = ('-id',)
 
     def delete(self):

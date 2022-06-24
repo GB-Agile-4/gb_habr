@@ -5,11 +5,9 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 
 from mainapp.models import ArticleCategory
-from article.models import Article
-
+from articleapp.models import Article
 
 User = get_user_model()
-
 
 JSON_PATH = 'mainapp/json'
 
