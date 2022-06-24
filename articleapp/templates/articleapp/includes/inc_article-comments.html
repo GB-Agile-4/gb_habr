@@ -12,8 +12,46 @@
 <div class="articles-list">
         <div class="articles-list-item">
                 <div class="article-snippet">
-                        <h2 class="comments-wrapper__title">Комментарии
-                            <span class="comments-wrapper__comments-count">10</span></h2>
+                        <h2 class="comments-wrapper__title">Комментарии:
+                            <span class="comments-wrapper__comments-count">
+                                {% with comments.count as total_comments %}
+                                        <h2>
+                                                {{ total_comments }}
+                                        </h2>
+                                {% endwith %}
+                             </span></h2>
+                        {% for comment in comments %}
+                            <div class="comment">
+                                <p class="info">
+                                    {{ comment.comment_author }}
+                                    {{ comment.created_at}}
+                                </p>
+                                {{ comment.body|linebreaks }}
+                                <br>
+                            </div>
+                        {% empty %}
+                            <br>
+                            <br>
+                            <p>Пока комментариев нет</p>
+                            <br>
+                            <br>
+                        {% endfor %}
+
+                        {% if user.is_authenticated %}
+                            {% if new_comment %}
+                                <h4>Ваш комментарий добавлен</h4>
+                            {% else %}
+                                <h4>Добавьте новый комментарий</h4>
+                                <br>
+                                <form action="." method="post">
+                                    {% csrf_token %}
+                                    {{ comment_form.as_p }}
+                                    <p><input type="submit" value="Добавить"></p>
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            <h4>Авторизируйтесь, чтобы написать комментарий</h4>
+                        {% endif %}
                 </div>
         </div>
 </div>
