@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from django.urls import reverse, reverse_lazy
 
+from commentapp.forms import CommentCreateForm
 from .models import Article
 from .models import ArticleCategory
 from .forms import ArticleCreateForm
+from commentapp.models import Comment
 
 
 class ArticleCategoryView(ListView):
@@ -18,12 +20,35 @@ class ArticleView(ListView):
     queryset = Article.objects.all()
 
 
-class ArticleDetailView(DetailView):
-    model = Article
+# class ArticleDetailView(DetailView):
+#     model = Article
+#
+#     def get_context_data(self, **kwargs):
+#         ctx = super().get_context_data(**kwargs)
+#         return ctx
 
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        return ctx
+
+def article_detail(request, pk):
+    template_name = 'articleapp/article_detail.html'
+    article = get_object_or_404(Article, pk=pk)
+    print(article.body, article.author)
+    comments = article.comments.filter(is_active=True)
+    new_comment = None
+
+    if request.method == 'POST':
+        comment_form = CommentCreateForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.article = article
+            new_comment.comment_author = request.user
+            new_comment.save()
+    else:
+        comment_form = CommentCreateForm()
+
+    return render(request, template_name, {'article': article,
+                                           'comments': comments,
+                                           'new_comment': new_comment,
+                                           'comment_form': comment_form})
 
 
 class ArticleCreateView(CreateView):
@@ -43,7 +68,8 @@ class ArticleCreateView(CreateView):
 
 class ArticleDeleteView(DeleteView):
     model = Article
-    success_url = '/articleapp/'
+    success_url = '/article/'
+
 
 
 class ArticleUpdateView(UpdateView):

@@ -11,22 +11,23 @@
                     <div class="article-snippet">
                                 <div class="article-snippet-meta">
                                     <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
-                                    <a href="" class="article-snippet-author">{{ object.author }}</a>
+                                    <a href="" class="article-snippet-author">{{ article.author }}</a>
                                     <span class="article-snippet-published">
-                                            <time datetime="2022-05-27T21:23:45.000Z" title="Вставить МСК время">{{ object.created_at }}</time>
+                                            <time datetime="2022-05-27T21:23:45.000Z" title="Вставить МСК время">{{ article.created_at }}</time>
                                         </span>
                                 </div>
-                                <h2 class="article-snippet-title"> {{ object.title}}
+                                <h2 class="article-snippet-title"> {{ article.title}}
                                 </h2>
-                                <p> {{ object.body }}</p>
+                                <p> {{ article.body }}</p>
 
                     </div>
-                    {% if user == object.author %}
-                        <a class="btn" href="/article/edit/{{ object.pk }}">Редактировать</a>
+                    {% if user == article.author %}
+                        <a class="btn" href="/article/edit/{{ article.pk }}">Редактировать</a>
                     {% endif %}
 
-                    {% if user.is_staff or user == object.author %}
-                        <a class="btn" href="/article/delete/{{ object.pk }}">Удалить</a>
+                    {% if user.is_staff or user == article.author %}
+
+                        <a class="btn" href="/article/delete/{{ article.pk }}">Удалить</a>
                     {% endif %}
 
 

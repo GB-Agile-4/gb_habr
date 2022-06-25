@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from authapp.models import HabrUser
 
 
@@ -41,4 +43,3 @@ class Article(models.Model):
         if self.is_active:
             self.is_active = False
         self.save()
-
