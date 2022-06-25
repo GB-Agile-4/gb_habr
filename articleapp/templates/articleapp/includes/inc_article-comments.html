@@ -12,21 +12,26 @@
 <div class="articles-list">
         <div class="articles-list-item">
                 <div class="article-snippet">
-                        <h2 class="comments-wrapper__title">Комментарии:
+                        <h2 class="comments-wrapper__title">
+                            {% with comments.count as total_comments %}
                             <span class="comments-wrapper__comments-count">
-                                {% with comments.count as total_comments %}
-                                        <h2>
-                                                {{ total_comments }}
-                                        </h2>
-                                {% endwith %}
+
+                                        <h3>
+                                            {{ total_comments }} комментариев:
+                                            <br>
+                                            <br>
+                                        </h3>
+                            {% endwith %}
                              </span></h2>
                         {% for comment in comments %}
                             <div class="comment">
-                                <p class="info">
+                                <h6 class="info">
                                     {{ comment.comment_author }}
-                                    {{ comment.created_at}}
-                                </p>
-                                {{ comment.body|linebreaks }}
+                                    {{ comment.updated_at}}
+                                </h6>
+                                <h5>
+                                    {{ comment.body|linebreaks }}
+                                </h5>
                                 <br>
                             </div>
                         {% empty %}
