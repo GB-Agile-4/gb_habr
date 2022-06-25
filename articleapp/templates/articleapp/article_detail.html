@@ -45,6 +45,7 @@
                     {% endif %}
 
                     {% if user.is_staff or user == article.author %}
+
                         <a class="btn" href="/article/delete/{{ article.pk }}">Удалить</a>
                     {% endif %}
 
