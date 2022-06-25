@@ -6,8 +6,10 @@ from commentapp.models import Comment
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('category', 'title', 'author', 'body', 'created_at', 'updated_at', 'is_active', 'is_moderated', 'is_archived')
-    list_filter = ('category', 'author', 'is_active', 'created_at', 'updated_at', 'is_active', 'is_moderated')
+#     list_filter = ('category', 'author', 'created_at', 'updated_at', 'is_active', 'is_moderated')
+    list_filter = ('author', 'is_active','is_moderated')
     search_fields = ('title', 'body')
+
 
 
 class CommentAdmin(admin.ModelAdmin):
