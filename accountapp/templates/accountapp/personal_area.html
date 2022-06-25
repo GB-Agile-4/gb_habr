@@ -5,7 +5,7 @@
 <div class="pa-page-wrapper">
     <div class="pa-page-person-date">
         <p>
-            <img src="{{ user.avatar }}" alt="{{ user.username }}">
+            <img src="{{ MEDIA_URL }}{{ user.avatar }}" alt="{{ user.username }}">
         </p>
         <p> {{ user.username }}</p>
         {% if user.first_name%}
@@ -27,7 +27,7 @@
         <div style="margin: 20px">
             <span>Ваши публикации</span>
             <span>
-                <a class="pa-button-article" href="{% url 'user:create' %}">
+                <a class="pa-button-article" href="{% url 'article:post' %}">
                     Добавить публикацию
                 </a>
             </span>
@@ -42,9 +42,9 @@
                         <span>{{article.created_at}}</span>
                     </div>
                     <h2 class="article-snippet-title">
-                        <a href="" class="article-snippet-title-link">{{article.name}}</a>
+                        <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
                     </h2>
-                    <p> {{article.text}} </p>
+                    <p> {{article.body}} </p>
                 </div>
             </artical>
             {% endfor %}
@@ -52,8 +52,8 @@
             <div class="articles-list-item"> У вас пока ещё нет публикаций!</div>
             {% endif %}
             </artical>
-
         </div>
 
     </div>
     {% endblock %}
+</div>

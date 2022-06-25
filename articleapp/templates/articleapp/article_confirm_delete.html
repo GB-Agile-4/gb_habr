@@ -1,0 +1,33 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--Контент страницы-->
+    <article class="content">
+        {% block feed %}
+            <!--Обёртка для статей в ленте-->
+            <div class="articles-list">
+                <div class="articles-list-item">
+                    <div class="content-section">
+                        <form method="POST">
+                            {% csrf_token %}
+                                <legend class="border-bottom mb-4">Удаление статьи</legend>
+                                <h2>Вы действительно хотите удалить статью "{{ object.name }}"?</h2>
+
+
+                            <div class="form-group">
+                                <button class="btn" type="submit">Удалить</button>
+                                <a class="btn" href="{% url 'content:articles' object.id %}">Вернуться</a>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        {% endblock %}
+    </article>
+    {% block sidebox %}
+        {% include 'mainapp/includes/inc_side-box.html' %}
+    {% endblock %}
+{% endblock %}

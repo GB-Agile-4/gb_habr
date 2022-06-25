@@ -2,12 +2,11 @@ from django.urls import path
 from mainapp import views as mainapp
 
 
-app_name = 'content'
+app_name = 'mainapp'
 
 urlpatterns = [
+    path('', mainapp.index, name='index'),
     path('articles/<int:pk>/', mainapp.articles, name='articles'),
-    path('news/', mainapp.news, name='news', ),
     path('hubs/', mainapp.hubs, name='hubs', ),
-    path('authors/', mainapp.authors, name='authors', ),
-    path('companies/', mainapp.companies, name='companies', ),
+    path('help/', mainapp.help, name='help', ),
 ]

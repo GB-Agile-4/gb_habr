@@ -1,0 +1,70 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--Контент страницы-->
+    <article class="content">
+            {% block content_topsection %}
+    <section class="top-section">
+        <div class="section-name">
+            <h1>Все потоки</h1>
+        </div>
+        <div class="tabs-wrapper">
+            <ul>
+                <li class="tab-item"><a href=" {% url 'mainapp:articles' 0 %}">Статьи</a></li>
+                <li class="tab-item"><a href=" {% url 'mainapp:hubs' %}" class="tab-active">Хабр</a></li>
+                <li class="tab-item"><a href=" {% url 'mainapp:help' %}">Помощь</a></li>
+
+            </ul>
+        </div>
+        <div class="button-wrapper">
+            <!--TODO: выпадающее меню-->
+            <button type="button" class="spoiler">Все подряд</button>
+        </div>
+    </section>
+    {% endblock %}
+        {% block feed %}
+            <!--Обёртка для статей в ленте-->
+            <div class="articles-list">
+                <div class="articles-list-item">
+                    <div class="article-snippet">
+                                <div class="article-snippet-meta">
+                                    <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
+                                    <a href="" class="article-snippet-author">{{ article.author }}</a>
+                                    <span class="article-snippet-published">
+                                            <time datetime="2022-05-27T21:23:45.000Z" title="Вставить МСК время">{{ article.created_at }}</time>
+                                        </span>
+                                </div>
+                                <h2 class="article-snippet-title"> {{ article.title}}
+                                </h2>
+                                <p> {{ article.body }}</p>
+
+                    </div>
+                    {% if user == article.author %}
+                        <a class="btn" href="/article/edit/{{ article.pk }}">Редактировать</a>
+                    {% endif %}
+
+                    {% if user.is_staff or user == article.author %}
+
+                        <a class="btn" href="/article/delete/{{ article.pk }}">Удалить</a>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        {% endblock %}
+
+
+        {% block comments %}
+            {% include 'articleapp/includes/inc_article-comments.html' %}
+        {% endblock %}
+
+
+    </article>
+
+
+    {% block sidebox %}
+        {% include 'mainapp/includes/inc_side-box.html' %}
+    {% endblock %}
+{% endblock %}
+

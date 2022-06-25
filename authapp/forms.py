@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from authapp.models import HabrUser, HabrUserProfile
 from django import forms
+
+from authapp.models import HabrUser, HabrUserProfile
 
 
 class HabrUserLoginForm(AuthenticationForm):
@@ -25,13 +26,6 @@ class HabrUserRegisterForm(UserCreationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
-
-    def save(self, *args, **kwargs):
-        user = super().save(*args, **kwargs)
-        user.is_active = False
-
-        user.save()
-        return user
 
 
 class HabrUserEditForm(UserChangeForm):
