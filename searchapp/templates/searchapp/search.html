@@ -2,29 +2,47 @@
 {% load static %}
 
 {% block content %}
-    <div class="search-container">
-        <form class="search-form" action="{% url 'search:search' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input class="search-input" type="text" name="to_search" id="">
-            <input class="search-bttn" type="submit" class="btn btn-primary" value="Найти">
-        </form>
-        <div class="articles-list">
-                    {% for article in articles %}
-                        {% if article.is_active %}
-                        <article id={{ article.pk }} class="articles-list-item">
-                        <div class="article-snippet">
-                            <div class="article-snippet-meta">
-                                <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt=""></a>
-                                <a href="" class="article-snippet-author">{{ article.author }}</a>
-                                <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
-                                <span class="article-snippet-published">
+<div class="search-container">
+    <form class="search-form" action="{% url 'search:search' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input class="search-input" type="text" name="to_search" id="">
+        <input class="search-bttn" type="submit" class="btn btn-primary" value="Найти">
+    </form>
+    {% if articles %}
+    <div class="dropdown-block">
+        <label class="dropdown">
+            <div class="dd-button">
+                По названию
+            </div>
+            <input type="checkbox" class="dd-input" id="test">
+            <ul class="dd-menu">
+                <li>
+                    <a href="">Сначала свежие</a>
+                </li>
+                <li>
+                    <a href="">Сначала с высоким рейтингом</a>
+                </li>
+            </ul>
+        </label>
+    </div>
+    {% endif %}
+    <div class="articles-list">
+        {% for article in articles %}
+        {% if article.is_active %}
+        <article id={{ article.pk }} class="articles-list-item">
+            <div class="article-snippet">
+                <div class="article-snippet-meta">
+                    <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt=""></a>
+                    <a href="" class="article-snippet-author">{{ article.author }}</a>
+                    <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
+                    <span class="article-snippet-published">
                                     <time>{{ article.created_at }}</time>
                                 </span>
-                            </div>
-                        </div>
-                        </article>
-                        {% endif %}
-                    {% endfor %}
-        </div>
+                </div>
+            </div>
+        </article>
+        {% endif %}
+        {% endfor %}
     </div>
+</div>
 {% endblock %}
