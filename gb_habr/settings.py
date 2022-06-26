@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accountapp',
     'searchapp',
     'commentapp',
+    'likeapp',
 ]
 
 
