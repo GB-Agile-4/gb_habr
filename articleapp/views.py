@@ -20,19 +20,11 @@ class ArticleView(ListView):
     queryset = Article.objects.all()
 
 
-# class ArticleDetailView(DetailView):
-#     model = Article
-#
-#     def get_context_data(self, **kwargs):
-#         ctx = super().get_context_data(**kwargs)
-#         return ctx
-
-
 def article_detail(request, pk):
     template_name = 'articleapp/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
     print(article.body, article.author)
-    comments = article.comments.filter(is_active=True)
+    comments = article.comments.filter(is_active=True).order_by('-created_at')
     new_comment = None
 
     if request.method == 'POST':
