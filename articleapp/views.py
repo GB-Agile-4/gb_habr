@@ -23,7 +23,6 @@ class ArticleView(ListView):
 def article_detail(request, pk):
     template_name = 'articleapp/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
-    print(article.body, article.author)
     comments = article.comments.filter(is_active=True).order_by('-created_at')
     new_comment = None
 

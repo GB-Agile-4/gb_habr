@@ -35,9 +35,11 @@ class Article(models.Model):
     is_archived = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    like = models.IntegerField('Лайк', default = 0)
+    dislike = models.IntegerField('Дизлайк', default = 0)
 
     def __str__(self):
-        return f'{self.title} ({self.category.name}) {self.author} '
+        return f'{self.title} ({self.category.name}) {self.author} {self.like.count} {self.dislike.count}'
 
     def delete(self):
         if self.is_active:
