@@ -10,7 +10,13 @@
                     {% csrf_token %}
                     <div class="search_bar-wrapper">
                         <input autofocus="autofocus" placeholder="Поиск" type="text" name="to_search" id="">
-                        <div><i class="fa-regular fa-magnifying-glass"></i></div>
+                        <div class="search_bar-icon">
+                            <span class="icon-wrapper">
+                                <object data="/static/img/icons/search.svg" type="image/svg+xml" width="20" height="20">
+                                    <img src="/static/img/icons/search.png" alt="search">
+                                </object>
+                            </span>
+                        </div>
                     </div>
                     <input hidden="hidden" type="submit" class="btn btn-primary" value="Найти">
                 </form>
