@@ -16,7 +16,7 @@ def search(request):
 
     if title:
         order = request.GET.get('order', 'title')
-        articles = Article.objects.filter(title__contains=title).order_by(f'-{order}')
+        articles = Article.objects.filter(title__icontains=title).order_by(f'-{order}')
         context = {'articles': articles, 'query': title, 'order': sort_order.get(order)}
         return render(request, 'searchapp/search.html', context=context)
 
