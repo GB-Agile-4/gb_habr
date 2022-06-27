@@ -10,6 +10,7 @@
                     {% csrf_token %}
                     <div class="search_bar-wrapper">
                         <input autofocus="autofocus" placeholder="Поиск" type="text" name="to_search" id="">
+                        <div><i class="fa-regular fa-magnifying-glass"></i></div>
                     </div>
                     <input hidden="hidden" type="submit" class="btn btn-primary" value="Найти">
                 </form>
@@ -42,8 +43,8 @@
                                     <a href="/article/{{ article.pk }}/"
                                        class="article-snippet-title-link">{{ article.title }}</a>
                                     <span class="article-snippet-published">
-                                <time>{{ article.created_at }}</time>
-                            </span>
+                                        <time>{{ article.created_at }}</time>
+                                    </span>
                                 </div>
                             </div>
                         </article>
