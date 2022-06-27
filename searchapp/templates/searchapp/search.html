@@ -2,27 +2,57 @@
 {% load static %}
 
 {% block content %}
-    <form class="form-horizontal" action="{% url 'search:search' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="text" name="to_search" id="">
-        <input type="submit" class="btn btn-primary" value="Найти">
-    </form>
-    <div class="articles-list">
+    <article class="content">
+        {% block content_topsection %}
+            <section class="top-section">
+                <form class="form-search-horizontal" action="{% url 'search:search' %}" method="POST"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="search_bar-wrapper">
+                        <input autofocus="autofocus" placeholder="Поиск" type="text" name="to_search" id="">
+                    </div>
+                    <input hidden="hidden" type="submit" class="btn btn-primary" value="Найти">
+                </form>
+                {#                <div class="tabs-wrapper">#}
+                {#                    <ul>#}
+                {#TODO: ссылки по тематике после ввода условий поиска#}
+                {#                        <li class="tab-item"><a href=" {% url 'mainapp:articles' 0 %}" class="tab-active">Статьи</a>#}
+                {#                        </li>#}
+                {#                        <li class="tab-item"><a href=" {% url 'mainapp:hubs' %}">Хабы</a></li>#}
+                {#                        <li class="tab-item"><a href=" {% url 'mainapp:help' %}">Помощь</a></li>#}
+                {#                    </ul>#}
+                {#                </div>#}
+                {#                <div class="button-wrapper">#}
+                {#                    <!--TODO: выпадающее меню-->#}
+                {#                    <button type="button" class="spoiler">Все подряд</button>#}
+                {#                </div>#}
+            </section>
+        {% endblock %}
+        {% block feed %}
+            <div class="articles-list">
                 {% for article in articles %}
                     {% if article.is_active %}
-                    <article id={{ article.pk }} class="articles-list-item">
-                    <div class="article-snippet">
-                        <div class="article-snippet-meta">
-                            <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt=""></a>
-                            <a href="" class="article-snippet-author">{{ article.author }}</a>
-                            <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
-                            <span class="article-snippet-published">
+                        <article id={{ article.pk }} class="articles-list-item">
+                            <div class="article-snippet">
+                                <div class="article-snippet-meta">
+                                    <a class="article-snippet-userpic"><img
+                                            src="{{ MEDIA_URL }}{{ article.author.avatar }}"
+                                            alt=""></a>
+                                    <a href="" class="article-snippet-author">{{ article.author }}</a>
+                                    <a href="/article/{{ article.pk }}/"
+                                       class="article-snippet-title-link">{{ article.title }}</a>
+                                    <span class="article-snippet-published">
                                 <time>{{ article.created_at }}</time>
                             </span>
-                        </div>
-                    </div>
-                    </article>
+                                </div>
+                            </div>
+                        </article>
                     {% endif %}
                 {% endfor %}
-    </div>
+            </div>
+        {% endblock %}
+    </article>
+    {% block sidebox %}
+        {% include 'mainapp/includes/inc_side-box.html' %}
+    {% endblock %}
 {% endblock %}
