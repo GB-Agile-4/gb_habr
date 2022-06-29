@@ -5,8 +5,8 @@ from articleapp.models import ArticleCategory, Article
 
 
 def index(request):
-    article_categories = ArticleCategory.objects.all().order_by('pk')
-    articles = Article.objects.all()
+    article_categories = ArticleCategory.objects.all()
+    articles = Article.objects.order_by('-created_at')
 
     context = {
         'article_categories': article_categories,
@@ -20,12 +20,12 @@ def articles(request, pk):
     article_categories = ArticleCategory.objects.all()
 
     if pk == 0:
-        articles = Article.objects.all()
+        articles = Article.objects.order_by('-created_at')
         category_item = {'name': 'Все потоки',
                          'pk': 0}
     else:
         category_item = get_object_or_404(ArticleCategory, pk=pk)
-        articles = Article.objects.filter(category__pk=pk)
+        articles = Article.objects.filter(category__pk=pk).order_by('-created_at')
 
     context = {
         'article_categories': article_categories,

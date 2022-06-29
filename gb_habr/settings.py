@@ -86,9 +86,9 @@ WSGI_APPLICATION = 'gb_habr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myproject',
-        'USER': 'myprojectuser',
-        'PASSWORD': 'password',
+        'NAME': 'gbhabr',
+        'USER': 'gbhabr',
+        'PASSWORD': 'gbhabr',
         'HOST': 'localhost',
         'PORT': '',
     }
