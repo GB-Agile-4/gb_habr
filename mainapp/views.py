@@ -5,7 +5,7 @@ from articleapp.models import ArticleCategory, Article
 
 
 def index(request):
-    article_categories = ArticleCategory.objects.all()
+    article_categories = ArticleCategory.objects.all().order_by('pk')
     articles = Article.objects.all()
 
     context = {

@@ -5,15 +5,18 @@
 <div class="pa-page-wrapper">
     <div class="pa-page-person-date">
         <p>
-            <img src="{{ MEDIA_URL }}{{ user.avatar }}" alt="{{ user.username }}">
+            <img style="height: 200px; width: 200px;"
+                 src="{{ MEDIA_URL }}{{ habr_user.avatar }}" alt="{{ habr_user.username }}">
         </p>
-        <p> {{ user.username }}</p>
-        {% if user.first_name%}
-        <p> Имя: {{user.first_name}}</p>
+        <p> {{ habr_user.username }}</p>
+        {% if habr_user.first_name%}
+        <p> Имя: {{habr_user.first_name}}</p>
         {% endif %}
-        {% if user.last_name %}
-        <p> Фамилия: {{user.last_name}}</p>
+        {% if habr_user.last_name %}
+        <p> Фамилия: {{habr_user.last_name}}</p>
         {% endif %}
+
+        {% if habr_user == user %}
         <p>
                 <a class="pa-button-profile" href="{% url 'auth:edit'%}">
                     Редактировать профиль
@@ -22,6 +25,7 @@
                     Выйти
                 </a>
         </p>
+        {% endif %}
     </div>
     <div class="pa-page-articles-date">
         <div style="margin: 20px">
@@ -42,14 +46,15 @@
                         <span>{{article.created_at}}</span>
                     </div>
                     <h2 class="article-snippet-title">
-                        <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
+                        <a href="{% url 'article:' article.pk"
+                           class="article-snippet-title-link">{{ article.title }}</a>
                     </h2>
                     <p> {{article.body}} </p>
                 </div>
             </artical>
             {% endfor %}
             {% else %}
-            <div class="articles-list-item"> У вас пока ещё нет публикаций!</div>
+            <div class="articles-list-item"> Публикации отсутствуют!</div>
             {% endif %}
             </artical>
         </div>
