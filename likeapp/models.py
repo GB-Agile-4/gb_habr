@@ -6,8 +6,7 @@ from articleapp.models import Article
 class Mark(models.Model):
     CHOICES = (
         ("LIKE", "like"),
-        ("DISLIKE", "dislike"),
-        (None, "None")
+        ("DISLIKE", "dislike")
     )
 
     habruser = models.ForeignKey(HabrUser, on_delete=models.CASCADE, related_name='marks')
