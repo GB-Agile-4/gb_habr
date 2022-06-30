@@ -3,38 +3,25 @@
 
 {% block content %}
 <div class="pa-page-wrapper">
-    <div class="pa-page-person-date">
-        <p>
-            <img style="height: 200px; width: 200px;"
-                 src="{{ MEDIA_URL }}{{ habr_user.avatar }}" alt="{{ habr_user.username }}">
-        </p>
-        <p> {{ habr_user.username }}</p>
-        {% if habr_user.first_name%}
-        <p> Имя: {{habr_user.first_name}}</p>
-        {% endif %}
-        {% if habr_user.last_name %}
-        <p> Фамилия: {{habr_user.last_name}}</p>
-        {% endif %}
-
-        {% if habr_user == user %}
-        <p>
-                <a class="pa-button-profile" href="{% url 'auth:edit'%}">
-                    Редактировать профиль
-                </a>
-                <a class="pa-button-profile" href="{% url 'auth:logout'%}">
-                    Выйти
-                </a>
-        </p>
-        {% endif %}
-    </div>
+    {% include 'accountapp/includes/inc_left_sidebar.html' %}
     <div class="pa-page-articles-date">
+        {% if habr_user == user and habr_user.is_banned %}
+        <p style="color: red; font-weight: bolder;">Вас забанили!<br>
+            Вы больше не можете публиковать статьи и писать комментарии!<br>
+            Просьба обратиться к администрации!
+        </p>
+        {% else %}
         <div style="margin: 20px">
+            {% if habr_user == user %}
             <span>Ваши публикации</span>
             <span>
                 <a class="pa-button-article" href="{% url 'article:post' %}">
                     Добавить публикацию
                 </a>
             </span>
+            {% else %}
+            <span>Публикации пользователя</span>
+            {% endif %}
         </div>
         <hr>
         <div>
@@ -46,10 +33,23 @@
                         <span>{{article.created_at}}</span>
                     </div>
                     <h2 class="article-snippet-title">
-                        <a href="{% url 'article:' article.pk"
+                        <a href="{% url 'article:article_detail' article.pk %}"
                            class="article-snippet-title-link">{{ article.title }}</a>
                     </h2>
-                    <p> {{article.body}} </p>
+                    <p style="margin:10px 0;"> {{article.body}} </p>
+                    <span>Статус:</span>
+                    {% if article.is_moderated %}
+                    <span style="color: green"> Опубликован.</span>
+                    {% endif %}
+                    {% if article.reject_moderation %}
+                    <span style="color: red"> Модерация не пройдена.</span>
+                    <a class="pa-button-article" href="{% url 'article:edit' article.pk %}">
+                        Исправить
+                    </a>
+                    {% endif %}
+                    {% if not article.is_moderated and not article.reject_moderation%}
+                    <span> На модерации.</span>
+                    {% endif %}
                 </div>
             </artical>
             {% endfor %}
@@ -58,7 +58,7 @@
             {% endif %}
             </artical>
         </div>
-
+    {% endif %}
     </div>
     {% endblock %}
 </div>

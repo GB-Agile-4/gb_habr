@@ -8,6 +8,7 @@ def personal_area(request, slug):
     articles = Article.objects.filter(author__username=slug)
     habr_user = HabrUser.objects.get(username=slug)
 
+
     context = {
         'articles': articles,
         'habr_user': habr_user
