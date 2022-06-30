@@ -5,26 +5,33 @@
 <div class="search-container">
     <form class="search-form" action="{% url 'search:search' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input class="search-input" type="text" name="to_search" id="">
-        <input class="search-bttn" type="submit" class="btn btn-primary" value="Найти">
+        <input class="search-input" type="text" name="title" placeholder="Поиск" value="{{ query }}" id="">
+        <input class="search-bttn" type="image" src="{{ MEDIA_URL }}searchapp/icon-searchapp.svg">
     </form>
     {% if articles %}
     <div class="dropdown-block">
         <label class="dropdown">
             <div class="dd-button">
-                По названию
+                {{ order }}
             </div>
             <input type="checkbox" class="dd-input" id="test">
             <ul class="dd-menu">
                 <li>
-                    <a href="">Сначала свежие</a>
+                    <a href="/search?title={{ query }}&order=title">По названию</a>
                 </li>
                 <li>
-                    <a href="">Сначала с высоким рейтингом</a>
+                    <a href="/search?title={{ query }}&order=created_at">Сначала свежие</a>
+                </li>
+                <li>
+                    <a href="/search?title={{ query }}&order=rating">Сначала с высоким рейтингом</a>
                 </li>
             </ul>
         </label>
     </div>
+    {% else %}
+        {% if query %}
+        <p class="search-p"> Публикации не найдены </p>
+        {% endif %}
     {% endif %}
     <div class="articles-list">
         {% for article in articles %}
