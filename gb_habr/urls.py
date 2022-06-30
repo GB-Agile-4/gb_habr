@@ -14,6 +14,7 @@ urlpatterns = [
     path('user/', include('accountapp.urls', namespace='user')),
     path('article/', include(('articleapp.urls', 'article'), namespace='article')),
     path('search/', include('searchapp.urls', namespace='search')),
+    path('like/', include('likeapp.urls', namespace='like')),
 ]
 
 if settings.DEBUG:

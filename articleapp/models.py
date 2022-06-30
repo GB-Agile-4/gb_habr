@@ -39,7 +39,7 @@ class Article(models.Model):
     dislike = models.IntegerField(default = 0, verbose_name='dislike')
 
     def __str__(self):
-        return f'{self.title} ({self.category.name}) {self.author} {self.like.count} {self.dislike.count}'
+        return f'{self.title} ({self.category.name}) {self.author} {self.like} {self.dislike}'
 
     def delete(self):
         if self.is_active:

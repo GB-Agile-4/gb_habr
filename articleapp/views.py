@@ -1,12 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-from django.urls import reverse, reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 from commentapp.forms import CommentCreateForm
 from .models import Article
 from .models import ArticleCategory
 from .forms import ArticleCreateForm
-from commentapp.models import Comment
+from likeapp.models import Mark
 
 
 class ArticleCategoryView(ListView):
@@ -62,9 +62,7 @@ class ArticleDeleteView(DeleteView):
     success_url = '/article/'
 
 
-
 class ArticleUpdateView(UpdateView):
     model = Article
     form_class = ArticleCreateForm
     success_url = '/'
-
