@@ -1,11 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 
 from .models import Mark
 from articleapp.models import Article
 
 
 def add_like(request, pk):
-    template_name = 'articleapp/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
 
     if request.user.is_authenticated:
@@ -31,14 +31,10 @@ def add_like(request, pk):
                 article.save()
                 user_mark.save()
 
-    comments = article.comments.filter(is_active=True).order_by('-created_at')
-
-    return redirect(request.GET.get('next', '/'))
-    # return render(request, template_name, {'article': article,'comments': comments})
+    return HttpResponseRedirect(f'http://127.0.0.1:8000/article/{pk}/')
 
 
 def add_dislike(request, pk):
-    template_name = 'articleapp/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
 
     if request.user.is_authenticated:
@@ -64,8 +60,4 @@ def add_dislike(request, pk):
                 article.save()
                 user_mark.save()
 
-    comments = article.comments.filter(is_active=True).order_by('-created_at')
-
-    return redirect(request.GET.get('next', '/'))
-    # return render(request, template_name, {'article': article,
-    #                                        'comments': comments})
+    return HttpResponseRedirect(f'http://127.0.0.1:8000/article/{pk}/')
