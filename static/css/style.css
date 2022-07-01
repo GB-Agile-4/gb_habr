@@ -603,24 +603,29 @@ svg {
 
 .search-input {
   border: 1px solid #dadada;
+  border-right: 0px;
   display: block;
-  height: 52px;
-  padding: 10px 30px;
+  height: 35px;
+  padding: 10px;
   width: 70%;
 }
 
-.search-bttn {
-  background: #dadada;
-  border: 0;
-  border-right: 1px solid #cbcbcc;
-  display: block;
-  float: right;
-  height: 52px;
-  width: 52px;
+.search-input:focus {
+  outline: none;
+  border: 1px solid #cbcbcc;
+
 }
 
-.search-bttn:hover {
-  background: #cbcbcc;
+.search-bttn {
+  background: white;
+  border: 1px solid #dadada;
+  border-left: 0px;
+  border-left: 0;
+  display: block;
+  float: right;
+  height: 35px;
+  width: 35px;
+  padding: 5px;
 }
 
 .dropdown-block {
@@ -634,12 +639,13 @@ svg {
 
 .dd-button {
   display: inline-block;
-  border: 1px solid gray;
+  border: 1px solid #dadada;
   border-radius: 4px;
   padding: 10px 30px 10px 20px;
   background-color: #ffffff;
   cursor: pointer;
   white-space: nowrap;
+  font-size: 14px;
 }
 
 .dd-button:after {
@@ -697,4 +703,10 @@ svg {
   display: block;
   margin: -10px -20px;
   padding: 10px 20px;
+  font-size: 14px;
+  color: inherit;
+}
+
+.search-p {
+  font-size: 14px;
 }
