@@ -60,13 +60,15 @@ class Article(models.Model):
     author = models.ForeignKey(HabrUser, on_delete=models.CASCADE, verbose_name='автор')
     is_active = models.BooleanField(default=True)
     is_moderated = models.BooleanField(default=False)
+    reject_moderation = models.BooleanField(default=False)
     is_archived = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    rating = models.IntegerField(default=0, verbose_name='рейтинг')
+    likes = models.IntegerField(default = 0, verbose_name='like')
+    dislikes = models.IntegerField(default = 0, verbose_name='dislike')
 
     def __str__(self):
-        return f'{self.title} ({self.category.name}) {self.author} '
+        return f'{self.title} ({self.category.name}) {self.author} {self.likes} {self.dislikes}'
 
     def delete(self):
         if self.is_active:

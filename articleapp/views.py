@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
+from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import requires_csrf_token
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
@@ -10,7 +12,7 @@ from commentapp.forms import CommentCreateForm
 from .models import Article
 from .models import ArticleCategory
 from .forms import ArticleCreateForm
-from commentapp.models import Comment
+from likeapp.models import Mark
 
 
 class ArticleCategoryView(ListView):
@@ -27,11 +29,12 @@ class ArticleView(ListView):
 def article_detail(request, pk):
     template_name = 'articleapp/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
-    print(article.body, article.author)
     comments = article.comments.filter(is_active=True).order_by('-created_at')
     new_comment = None
 
     if request.method == 'POST':
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
         comment_form = CommentCreateForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
@@ -51,6 +54,11 @@ class ArticleCreateView(CreateView):
     model = Article
     form_class = ArticleCreateForm
     success_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -72,6 +80,18 @@ class ArticleUpdateView(UpdateView):
     model = Article
     form_class = ArticleCreateForm
     success_url = '/'
+    
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+        return super().get(request, *args, **kwargs)    
+        
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_moderated = False
+        self.object.save()
+        return super().post(request, *args, **kwargs)
 
 
 @requires_csrf_token
@@ -85,7 +105,6 @@ def upload_image_view(request):
 
 
     return JsonResponse({'success': 1, 'file': {'url': file_url}})
-
 
 @requires_csrf_token
 def upload_file_view(request):

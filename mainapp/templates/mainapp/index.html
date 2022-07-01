@@ -31,7 +31,7 @@
             <div class="article-snippet">
                 <div class="article-snippet-meta">
                             <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt=""></a>
-                            <a href="" class="article-snippet-author">{{ article.author }}</a>
+                            <a href=" {% url 'user:account' article.author.username %}" class="article-snippet-author">{{ article.author }}</a>
                             <span class="article-snippet-published">
                                 <time>{{ article.created_at }}</time>
                             </span>
