@@ -27,7 +27,7 @@
         <div>
             {% if articles %}
             {% for article in articles %}
-            <artical class="articles-list-item">
+            <article class="articles-list-item">
                 <div class="article-snippet">
                     <div class="article-snippet-meta">
                         <span>{{article.created_at}}</span>
@@ -36,7 +36,9 @@
                         <a href="{% url 'article:article_detail' article.pk %}"
                            class="article-snippet-title-link">{{ article.title }}</a>
                     </h2>
-                    <p style="margin:10px 0;"> {{article.body}} </p>
+
+                    <section id="{{ article.id }}"></section>
+                    {% include 'articleapp/includes/article_body_script_preview.html' %}
                     <span>Статус:</span>
                     {% if article.is_moderated %}
                     <span style="color: green"> Опубликован.</span>
@@ -50,13 +52,18 @@
                     {% if not article.is_moderated and not article.reject_moderation%}
                     <span> На модерации.</span>
                     {% endif %}
+
                 </div>
-            </artical>
+            </article>
             {% endfor %}
             {% else %}
+
             <div class="articles-list-item"> Публикации отсутствуют!</div>
+
             {% endif %}
-            </artical>
+
+
+            </article>
         </div>
     {% endif %}
     </div>

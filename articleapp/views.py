@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
+<<<<<<<<< Temporary merge branch 1
 from django.contrib.auth.decorators import login_required
+=========
+from django.urls import reverse, reverse_lazy
+from django.http import HttpResponseRedirect
+>>>>>>>>> Temporary merge branch 2
 
 from commentapp.forms import CommentCreateForm
 from .models import Article
@@ -27,6 +32,8 @@ def article_detail(request, pk):
     new_comment = None
 
     if request.method == 'POST':
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
         comment_form = CommentCreateForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
@@ -47,6 +54,11 @@ class ArticleCreateView(CreateView):
     form_class = ArticleCreateForm
     success_url = '/'
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+        return super().get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['category'] = ArticleCategoryView.queryset
@@ -66,3 +78,19 @@ class ArticleUpdateView(UpdateView):
     model = Article
     form_class = ArticleCreateForm
     success_url = '/'
+<<<<<<<<< Temporary merge branch 1
+=========
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+        return super().get(request, *args, **kwargs)
+
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_moderated = False
+        self.object.save()
+        return super().post(request, *args, **kwargs)
+
+>>>>>>>>> Temporary merge branch 2

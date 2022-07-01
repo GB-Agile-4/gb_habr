@@ -11,5 +11,14 @@ class ArticleCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control articleapp-form'
-            field.help_text = ''
+            if field_name == 'body':
+                field.label = False
+            if field_name == 'title':
+                field.widget.attrs['placeholder'] = 'Заголовок'
+                field.widget.attrs['class'] = 'article_editor_title'
+                field.label = False
+            if field_name == 'category':
+                field.label = 'Хабы'
+
+            # field.widget.attrs['class'] = 'form-control articleapp-form'
+            # field.help_text = ''

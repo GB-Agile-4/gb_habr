@@ -3,6 +3,7 @@
 
 {% block content %}
     <!--Контент страницы-->
+
     <article class="content">
             {% block content_topsection %}
     <section class="top-section">
@@ -36,23 +37,24 @@
                                         </span>
                                 </div>
                                 <h2 class="article-snippet-title"> {{ article.title}}
-                                </h2>
-                                <p> {{ article.body }}</p>
+                                </h2>                           
+                                
+                                <section id="article-body"></section>
+                                {% include 'articleapp/includes/article_body_script.html' %}
                                 <br>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="50%">
 
-            <table width="100%">
-            <tr>
-                <td width="50%">
+                                            <a class="btn" href="/like/add_like/{{ article.pk }}">
+                                                <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
+                                            </a> <span class="lead">{{ article.likes }}</span>
 
-                    <a class="btn" href="/like/add_like/{{ article.pk }}">
-                        <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
-                    </a> <span class="lead">{{ article.likes }}</span>
-
-                    <a class="btn" href="/like/add_dislike/{{ article.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
-                        class="lead">{{ article.dislikes }}</span></td>
-                <td width="50%"></td>
-            </tr>
-        </table>
+                                            <a class="btn" href="/like/add_dislike/{{ article.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
+                                                class="lead">{{ article.dislikes }}</span></td>
+                                        <td width="50%"></td>
+                                    </tr>
+                                </table>
 
                     </div>
                     {% if user == article.author %}

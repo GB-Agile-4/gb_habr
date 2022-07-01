@@ -14,7 +14,12 @@ urlpatterns = [
     path('user/', include('accountapp.urls', namespace='user')),
     path('article/', include(('articleapp.urls', 'article'), namespace='article')),
     path('search/', include('searchapp.urls', namespace='search')),
+<<<<<<<<< Temporary merge branch 1
     path('like/', include('likeapp.urls', namespace='like')),
+=========
+    path('moder/', include('moderapp.urls', namespace='moder')),
+    path('comment/', include('commentapp.urls', namespace='comment')),
+>>>>>>>>> Temporary merge branch 2
 ]
 
 if settings.DEBUG:

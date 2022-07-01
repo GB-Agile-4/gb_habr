@@ -556,6 +556,15 @@ svg {
 
 }
 
+.article_editor_title {
+    margin:20px 0px 0px 20px;
+    font-size: 28px;
+    border: None;
+}
+.article_editor_title:focus {
+    outline: none;
+}
+
 .article-blocks__comments {
     margin-bottom: 12px;
 }
