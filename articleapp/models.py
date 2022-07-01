@@ -32,6 +32,7 @@ class Article(models.Model):
     author = models.ForeignKey(HabrUser, on_delete=models.CASCADE, verbose_name='автор')
     is_active = models.BooleanField(default=True)
     is_moderated = models.BooleanField(default=False)
+    reject_moderation = models.BooleanField(default=False)
     is_archived = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)

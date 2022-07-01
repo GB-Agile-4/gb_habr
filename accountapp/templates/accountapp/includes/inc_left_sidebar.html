@@ -1,0 +1,44 @@
+<div class="pa-page-person-date">
+    <p>
+        <img style="height: 200px; width: 200px;"
+             src="{{ MEDIA_URL }}{{ habr_user.avatar }}" alt="{{ habr_user.username }}">
+    </p>
+    <p> {{ habr_user.username }}</p>
+    {% if habr_user.first_name%}
+    <p> Имя: {{habr_user.first_name}}</p>
+    {% endif %}
+    {% if habr_user.last_name %}
+    <p> Фамилия: {{habr_user.last_name}}</p>
+    {% endif %}
+    {% if habr_user == user %}
+    <p>
+        <a class="pa-button-profile" href="{% url 'auth:edit'%}">
+            Редактировать профиль
+        </a>
+        <a class="pa-button-profile" href="{% url 'auth:logout'%}">
+            Выйти
+        </a>
+    </p>
+    {% if habr_user.is_staff %}
+    <br>
+    <h3> Меню модератора</h3>
+    <a class="pa-button-profile" href="{% url 'moder:moderate_list'%}">
+        Статьи на модерацию
+    </a>
+    {% endif %}
+    {% else %}
+    {% if user.is_staff %}
+    {% if habr_user.is_banned %}
+    <a class="pa-button-profile" style="background-color: #008000;"
+       href="{% url 'moder:ban_user' habr_user.pk %}">
+        Разблокировать пользователя
+    </a>
+    {% else %}
+    <a class="pa-button-profile" style="background-color: #ff0000;"
+       href="{% url 'moder:ban_user' habr_user.pk %}">
+        Заблокировать пользователя
+    </a>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+</div>
