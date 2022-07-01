@@ -2,8 +2,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.views.decorators.csrf import csrf_exempt
 
 from mainapp import views as mainapp
+from articleapp import views as articleapp
 
 
 urlpatterns = [
@@ -14,9 +16,12 @@ urlpatterns = [
     path('user/', include('accountapp.urls', namespace='user')),
     path('article/', include(('articleapp.urls', 'article'), namespace='article')),
     path('search/', include('searchapp.urls', namespace='search')),
+    path('uploadi/', csrf_exempt(articleapp.upload_image_view)),
+    path('uploadf/', csrf_exempt(articleapp.upload_file_view)),
     path('like/', include('likeapp.urls', namespace='like')),
     path('moder/', include('moderapp.urls', namespace='moder')),
     path('comment/', include('commentapp.urls', namespace='comment')),
+
 ]
 
 if settings.DEBUG:

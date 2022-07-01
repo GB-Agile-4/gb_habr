@@ -2,6 +2,15 @@
 {% load static %}
 
 {% block content %}
+    <style>
+        .hidden{
+            display: none;
+        }
+        [data-editorjs-wrapper] {
+            border: None !important;
+        }
+
+    </style>
     <!--Контент страницы-->
     <article class="content">
         {% block feed %}
@@ -9,11 +18,13 @@
             <div class="articles-list">
                 <div class="articles-list-item">
                     <div class="article-snippet">
-                                <div class="article-snippet-meta">
+                        <p>{{ user }} сегодня в {{ time }} </p>
+                                <div class="article-editor">
                                     <form method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
+                                        {{ form.media }}
                                         {{ form.as_p }}
-                                        <input type="submit" value="Опубликовать">
+                                        <input class= "submit-button" type="submit" value="Опубликовать" >
                                     </form>
                                 </div>
                     </div>
