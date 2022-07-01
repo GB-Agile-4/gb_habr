@@ -27,7 +27,7 @@
     <div class="articles-list">
         {% for article in articles %}
         {% if article.is_moderated and article.is_active %}
-        <article id={{ article.pk }} class="articles-list-item">
+        <article class="articles-list-item">
             <div class="article-snippet">
                 <div class="article-snippet-meta">
                             <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt=""></a>
@@ -39,7 +39,8 @@
                 <h2 class="article-snippet-title">
                     <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
                 </h2>
-                <p> {{ article.body }}</p>
+                <section id={{ article.id }}></section>
+                {% include 'articleapp/includes/article_body_script_preview.html' %}
             </div>
             <div class="article-icons">
                 <!--TODO: допилить иконки-->

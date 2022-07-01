@@ -3,6 +3,7 @@
 
 {% block content %}
     <!--Контент страницы-->
+
     <article class="content">
             {% block content_topsection %}
     <section class="top-section">
@@ -37,7 +38,9 @@
                                 </div>
                                 <h2 class="article-snippet-title"> {{ article.title}}
                                 </h2>
-                                <p> {{ article.body }}</p>
+{#                                <p> {{ article.body }}</p>#}
+                                <section id="article-body"></section>
+                                {% include 'articleapp/includes/article_body_script.html' %}
 
                     </div>
                     {% if user == article.author %}

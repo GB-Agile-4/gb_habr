@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.csrf import requires_csrf_token
+from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
+import datetime
 
 from commentapp.forms import CommentCreateForm
 from .models import Article
@@ -51,6 +55,7 @@ class ArticleCreateView(CreateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['category'] = ArticleCategoryView.queryset
+        ctx['time'] = datetime.datetime.now()
         return ctx
 
     def form_valid(self, form):
@@ -63,9 +68,33 @@ class ArticleDeleteView(DeleteView):
     success_url = '/article/'
 
 
-
 class ArticleUpdateView(UpdateView):
     model = Article
     form_class = ArticleCreateForm
     success_url = '/'
 
+
+@requires_csrf_token
+def upload_image_view(request):
+    f = request.FILES['image']
+    fs = FileSystemStorage()
+    fs.location += '/images/'
+    filename = str(f).split('.')[0]
+    file = fs.save(filename, f)
+    file_url = '/media/images/' + filename
+
+
+    return JsonResponse({'success': 1, 'file': {'url': file_url}})
+
+
+@requires_csrf_token
+def upload_file_view(request):
+    f = request.FILES['file']
+    fs = FileSystemStorage()
+    fs.location += '/files/'
+    filename, ext = str(f).split('.')
+    file = fs.save(filename, f)
+    file_url = '/media/images/' + filename
+
+    return JsonResponse({'success': 1, 'file': {'url': file_url, 'size': fs.size(filename), 'name': str(f),
+                                                'extension': ext}})

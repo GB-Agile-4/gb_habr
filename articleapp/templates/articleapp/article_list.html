@@ -11,8 +11,8 @@
                 </div>
                 <div class="tabs-wrapper">
                     <ul>
-                        <li class="tab-item"><a href=" {% url 'content:articles' 0 %}" class="tab-active">Статьи</a></li>
-                        <li class="tab-item"><a href=" {% url 'content:hubs' %}">Хабы</a></li>
+                        <li class="tab-item"><a href=" {% url 'mainapp:articles' 0 %}" class="tab-active">Статьи</a></li>
+                        <li class="tab-item"><a href=" {% url 'mainapp:hubs' %}">Хабы</a></li>
                     </ul>
                 </div>
                 <div class="button-wrapper">
@@ -26,7 +26,7 @@
             <div class="articles-list">
                 {% for article in object_list %}
                     {% if article.is_active %}
-                    <article id={{ article.pk }} class="articles-list-item">
+                    <article class="articles-list-item">
                     <div class="article-snippet">
                         <div class="article-snippet-meta">
                             <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
@@ -38,7 +38,8 @@
                         <h2 class="article-snippet-title">
                             <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
                         </h2>
-                        <p> {{ article.body }}</p>
+                               <section id={{ article.pk }}></section>
+                               {% include 'articleapp/includes/article_body_script_preview.html' %}
                     </div>
                     <div class="article-icons">
                         <!--TODO: допилить иконки-->

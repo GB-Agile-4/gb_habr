@@ -36,7 +36,7 @@
         <div>
             {% if articles %}
             {% for article in articles %}
-            <artical class="articles-list-item">
+            <article class="articles-list-item">
                 <div class="article-snippet">
                     <div class="article-snippet-meta">
                         <span>{{article.created_at}}</span>
@@ -44,14 +44,18 @@
                     <h2 class="article-snippet-title">
                         <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
                     </h2>
-                    <p> {{article.body}} </p>
+                    <section id="{{ article.id }}"></section>
+                   {% include 'articleapp/includes/article_body_script_preview.html' %}
                 </div>
-            </artical>
+            </article>
             {% endfor %}
             {% else %}
+
             <div class="articles-list-item"> У вас пока ещё нет публикаций!</div>
             {% endif %}
-            </artical>
+
+
+            </article>
         </div>
 
     </div>

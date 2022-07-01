@@ -1,0 +1,69 @@
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const articleBody = document.getElementById("article-body");
+    const articleId = document.getElementById({{article.id}})
+    console.log("{{article.body|escapejs}}");
+    console.log("{{article.id|escapejs}}");
+    let body = JSON.parse("{{article.body|escapejs}}");
+    let blocks = body.blocks;
+    let article_id = {{article.id}}
+    console.log(article_id)
+    {#console.log(blocks.length);#}
+
+    for (let index = 0; index <= blocks.length; index++) {
+      console.log(blocks[index], index);
+
+      switch (blocks[index].type) {
+        case "Header":
+          let head = document.createElement(`h${blocks[index].data.level}`);
+          head.textContent = blocks[index].data.text;
+          articleId.appendChild(head)
+          {#articleBody.appendChild(head);#}
+          break;
+
+        case "Image":
+          let div = document.createElement("div");
+          let image = document.createElement("img");
+          let caption = document.createElement("small");
+          image.src = `${blocks[index].data.file.url}`;
+          image.style = "margin-top:20px; margin-bottom:20px";
+          image.height = 100;
+          image.width = 100;
+          caption.textContent = blocks[index].data.caption;
+          caption.style = "margin-top:5px;";
+          div.appendChild(image);
+          div.appendChild(caption);
+          div.style = "width:100%;display:grid;place-items:center";
+          articleId.appendChild(div)
+        {#articleBody.appendChild(div);#}
+          break;
+
+        case "List":
+          let list;
+          if (blocks[index].data.style == "unordered") {
+            list = document.createElement("ul");
+          } else {
+            list = document.createElement("ol");
+          }
+          for (const item in blocks[index].data.items) {
+            let li = document.createElement("li");
+            li.textContent = blocks[index].data.items[item];
+            list.appendChild(li);
+          }
+          articleId.appendChild(list)
+          {#articleBody.appendChild(list);#}
+          break;
+
+        case "paragraph":
+          const p = document.createElement("p");
+          p.innerHTML = blocks[index].data.text;
+          articleId.appendChild(p)
+          {#articleBody.appendChild(p);#}
+          break;
+
+        default:
+          break;
+      }
+    }
+  });
+</script>
