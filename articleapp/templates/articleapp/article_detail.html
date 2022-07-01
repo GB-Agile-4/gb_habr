@@ -38,6 +38,21 @@
                                 <h2 class="article-snippet-title"> {{ article.title}}
                                 </h2>
                                 <p> {{ article.body }}</p>
+                                <br>
+
+            <table width="100%">
+            <tr>
+                <td width="50%">
+
+                    <a class="btn" href="/like/add_like/{{ article.pk }}">
+                        <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
+                    </a> <span class="lead">{{ article.likes }}</span>
+
+                    <a class="btn" href="/like/add_dislike/{{ article.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
+                        class="lead">{{ article.dislikes }}</span></td>
+                <td width="50%"></td>
+            </tr>
+        </table>
 
                     </div>
                     {% if user == article.author %}
@@ -48,6 +63,8 @@
 
                         <a class="btn" href="/article/delete/{{ article.pk }}">Удалить</a>
                     {% endif %}
+
+
 
 
                 </div>

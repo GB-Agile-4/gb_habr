@@ -139,4 +139,5 @@ adminapp/migrations/
 accountapp/migrations/
 searchapp/migrations/
 commentapp/migrations/
+likeapp/migrations/
 moderapp/migrations/

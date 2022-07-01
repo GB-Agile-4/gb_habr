@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'articleapp',
     'accountapp',
     'searchapp',
-    'commentapp',
+    'commentapp',es
+    'likeapp',
     'moderapp',
 ]
 
