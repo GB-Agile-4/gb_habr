@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accountapp',
     'searchapp',
     'commentapp',
+    'moderapp',
 ]
 
 AUTH_USER_MODEL = 'authapp.HabrUser'
@@ -80,6 +81,7 @@ WSGI_APPLICATION = 'gb_habr.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
 
 DATABASES = {
     'default': {

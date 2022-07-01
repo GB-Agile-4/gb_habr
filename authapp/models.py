@@ -8,6 +8,7 @@ class HabrUser(AbstractUser):
     avatar = models.ImageField(upload_to='users_avatars', blank=True, verbose_name='Аватар')
     age = models.PositiveSmallIntegerField(verbose_name='Возраст', default=18)
     avatar_url = models.CharField(max_length=128, blank=True, null=True)
+    is_banned = models.BooleanField(default=False)
 
 
 class HabrUserProfile(models.Model):

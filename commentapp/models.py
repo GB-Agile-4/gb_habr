@@ -3,7 +3,6 @@ from articleapp.models import Article
 from authapp.models import HabrUser
 
 
-
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
     comment_author = models.ForeignKey(HabrUser, on_delete=models.CASCADE, related_name='comments')
