@@ -131,3 +131,13 @@ dmypy.json
 .pyre/
 
 media/
+
+authapp/migrations/
+articleapp/migrations/
+mainapp/migrations/
+adminapp/migrations/
+accountapp/migrations/
+searchapp/migrations/
+commentapp/migrations/
+likeapp/migrations/
+moderapp/migrations/
