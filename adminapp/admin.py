@@ -11,7 +11,6 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title', 'body')
 
 
-
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('article', 'comment_author', 'body', 'created_at', 'updated_at', 'is_active', 'is_moderated')
     list_filter = ('is_active', 'created_at', 'updated_at')

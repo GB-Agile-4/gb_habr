@@ -35,6 +35,8 @@ def article_detail(request, pk):
             new_comment.article = article
             new_comment.comment_author = request.user
             new_comment.save()
+            comment_form = CommentCreateForm()
+
     else:
         comment_form = CommentCreateForm()
 

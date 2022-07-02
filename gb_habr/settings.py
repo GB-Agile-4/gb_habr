@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'accountapp',
     'searchapp',
     'likeapp',
-    'commentapp'
+    'commentapp',
     'moderapp',
+
+    'django_editorjs',
 ]
 
 AUTH_USER_MODEL = 'authapp.HabrUser'
