@@ -42,12 +42,9 @@ INSTALLED_APPS = [
     'articleapp',
     'accountapp',
     'searchapp',
-    'commentapp',
-<<<<<<<<< Temporary merge branch 1
     'likeapp',
-=========
+    'commentapp'
     'moderapp',
->>>>>>>>> Temporary merge branch 2
 ]
 
 AUTH_USER_MODEL = 'authapp.HabrUser'
@@ -87,14 +84,21 @@ WSGI_APPLICATION = 'gb_habr.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'gbhabr',
+#         'USER': 'gbhabr',
+#         'PASSWORD': 'gbhabr',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gbhabr',
-        'USER': 'gbhabr',
-        'PASSWORD': 'gbhabr',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

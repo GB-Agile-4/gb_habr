@@ -17,7 +17,7 @@
                             <span class="comments-wrapper__comments-count">
 
                                         <h3>
-                                            {{ total_comments }} комментариев:
+                                            Комментарии: {{ total_comments }}
                                             <br>
                                             <br>
                                         </h3>
@@ -32,13 +32,14 @@
                                 <h5>
                                     {{ comment.body|linebreaks }}
                                 </h5>
-                                                {% if comment.comment_author == user or user.is_staff %}
+                {% if comment.comment_author == user or user.is_staff %}
                 <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
                    href="{% url 'comment:delete' comment.pk %}">
                     Удалить
                 </a>
                 {% endif %}
                                 <br>
+
                             </div>
                         {% empty %}
                             <br>

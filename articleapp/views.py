@@ -1,17 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-<<<<<<<<< Temporary merge branch 1
-from django.contrib.auth.decorators import login_required
-=========
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.urls import reverse
 from django.http import HttpResponseRedirect
->>>>>>>>> Temporary merge branch 2
 
 from commentapp.forms import CommentCreateForm
 from .models import Article
 from .models import ArticleCategory
 from .forms import ArticleCreateForm
-from likeapp.models import Mark
 
 
 class ArticleCategoryView(ListView):
@@ -78,8 +73,6 @@ class ArticleUpdateView(UpdateView):
     model = Article
     form_class = ArticleCreateForm
     success_url = '/'
-<<<<<<<<< Temporary merge branch 1
-=========
 
     def get(self, request, *args, **kwargs):
         if request.user.is_banned:
@@ -92,5 +85,3 @@ class ArticleUpdateView(UpdateView):
         self.object.is_moderated = False
         self.object.save()
         return super().post(request, *args, **kwargs)
-
->>>>>>>>> Temporary merge branch 2
