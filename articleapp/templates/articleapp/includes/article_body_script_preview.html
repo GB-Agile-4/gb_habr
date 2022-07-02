@@ -7,10 +7,11 @@
     let body = JSON.parse("{{article.body|escapejs}}");
     let blocks = body.blocks;
     let article_id = {{article.id}}
+    let wordCount = 0
     console.log(article_id)
     {#console.log(blocks.length);#}
 
-    for (let index = 0; index <= blocks.length; index++) {
+    for (let index = 0; index <= 1; index++) {
       console.log(blocks[index], index);
 
       switch (blocks[index].type) {
@@ -26,9 +27,9 @@
           let image = document.createElement("img");
           let caption = document.createElement("small");
           image.src = `${blocks[index].data.file.url}`;
-          image.style = "margin-top:20px; margin-bottom:20px";
-          image.height = 100;
-          image.width = 100;
+          image.style = "margin-top:20px; margin-bottom:20px; max-width: 100%; object-fit: contain";
+          {#image.height = 100;#}
+          {#image.width = 100;#}
           caption.textContent = blocks[index].data.caption;
           caption.style = "margin-top:5px;";
           div.appendChild(image);
@@ -56,8 +57,13 @@
 
         case "paragraph":
           const p = document.createElement("p");
-          p.innerHTML = blocks[index].data.text;
+          let pText = blocks[index].data.text;
+          p.style = "word-wrap: break-word;"
+          p.innerHTML = pText;
+          console.log(blocks[index].data.text)
           articleId.appendChild(p)
+          wordCount += pText.length
+
           {#articleBody.appendChild(p);#}
           break;
 
