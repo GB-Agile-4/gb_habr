@@ -9,7 +9,7 @@ class ArticleAdmin(admin.ModelAdmin):
 #     list_filter = ('category', 'author', 'created_at', 'updated_at', 'is_active', 'is_moderated')
     list_filter = ('author', 'is_active','is_moderated')
     search_fields = ('title', 'body')
-
+    
 
 class HabrUserAdmin(admin.ModelAdmin):
     list_filter = ('is_staff', 'is_banned')
