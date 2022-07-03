@@ -32,6 +32,20 @@
                                 <h5>
                                     {{ comment.body|linebreaks }}
                                 </h5>
+                                <br>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="50%">
+
+                                            <a class="btn" href="/like/comment_like/{{ comment.pk }}">
+                                                <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
+                                            </a> <span class="lead">{{ comment.likes }}</span>
+
+                                            <a class="btn" href="/like/comment_dislike/{{ comment.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
+                                                class="lead">{{ comment.dislikes }}</span></td>
+                                        <td width="50%"></td>
+                                    </tr>
+                                </table>
                 {% if comment.comment_author == user or user.is_staff %}
                 <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
                    href="{% url 'comment:delete' comment.pk %}">
