@@ -88,7 +88,6 @@ def comment_like(request, pk):
             comment.likes += 1
             comment.save()
 
-
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
