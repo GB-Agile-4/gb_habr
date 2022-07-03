@@ -53,13 +53,17 @@
                             {% if new_comment %}
                                 <h4>Ваш комментарий добавлен</h4>
                             {% else %}
-                                <h4>Добавьте новый комментарий</h4>
+                                <a class="" style=""
+                                    href="{% url 'comment:add' article.pk %}">
+                                    Добавьте новый комментарий
+                                </a>
+
                                 <br>
-                                <form action="." method="post">
-                                    {% csrf_token %}
-                                    {{ comment_form.as_p }}
-                                    <p><input type="submit" value="Добавить"></p>
-                                </form>
+<!--                                <form action="." method="post">-->
+<!--                                    {% csrf_token %}-->
+<!--                                    {{ comment_form.as_p }}-->
+<!--                                    <p><input type="submit" value="Добавить"></p>-->
+<!--                                </form>-->
                             {% endif %}
                         {% else %}
                             <h4>Авторизируйтесь, чтобы написать комментарий</h4>

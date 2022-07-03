@@ -1,0 +1,44 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<!--    <style>-->
+<!--        .hidden{-->
+<!--            display: none;-->
+<!--        }-->
+<!--        [data-editorjs-wrapper] {-->
+<!--            border: None !important;-->
+<!--        }-->
+
+<!--    </style>-->
+    <!--Контент страницы-->
+    <article class="content">
+        {% block feed %}
+            <div class="articles-list">
+                <div class="articles-list-item">
+                    <div class="article-snippet">
+                        <p>Ваш комментарий к статье "{{ article.title }}":</p>
+                        <br>
+                                <div class="">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ comment_form.as_p }}
+                                        <br>
+<!--                                        <button class="submit-button" type="submit" value="">Опубликовать</button>-->
+                                            <input class="submit-button" type="submit" value="Опубликовать">
+                                        <br>
+                                        <br>
+                                    </form>
+                                    <a class= "" style="" href="/article/{{article.pk}}/">
+                                        << Вернуться к статье
+                                    </a>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </article>
+    {% block sidebox %}
+        {% include 'mainapp/includes/inc_side-box.html' %}
+    {% endblock %}
+{% endblock %}

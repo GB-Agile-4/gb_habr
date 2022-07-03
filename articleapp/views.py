@@ -24,26 +24,27 @@ def article_detail(request, pk):
     template_name = 'articleapp/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
     comments = article.comments.filter(is_active=True).order_by('-created_at')
-    new_comment = None
+    # new_comment = None
 
-    if request.method == 'POST':
-        if request.user.is_banned:
-            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
-        comment_form = CommentCreateForm(data=request.POST)
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
-            new_comment.article = article
-            new_comment.comment_author = request.user
-            new_comment.save()
-            comment_form = CommentCreateForm()
+    # if request.method == 'POST':
+    #     if request.user.is_banned:
+    #         return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+    #     comment_form = CommentCreateForm()
+    #     if comment_form.is_valid():
+    #         new_comment = comment_form.save(commit=False)
+    #         new_comment.article = article
+    #         new_comment.comment_author = request.user
+    #         new_comment.save()
+    #         comment_form = CommentCreateForm()
+    #
+    # else:
+    #     comment_form = CommentCreateForm()
 
-    else:
-        comment_form = CommentCreateForm()
-
+    # return render(request, template_name, {'article': article,
+    #                                        'comments': comments,
+    #                                        'comment_form': comment_form})
     return render(request, template_name, {'article': article,
-                                           'comments': comments,
-                                           'new_comment': new_comment,
-                                           'comment_form': comment_form})
+                                           'comments': comments})
 
 
 class ArticleCreateView(CreateView):
@@ -80,7 +81,6 @@ class ArticleUpdateView(UpdateView):
         if request.user.is_banned:
             return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
         return super().get(request, *args, **kwargs)
-
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
