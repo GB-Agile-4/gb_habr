@@ -2,15 +2,6 @@
 {% load static %}
 
 {% block content %}
-<!--    <style>-->
-<!--        .hidden{-->
-<!--            display: none;-->
-<!--        }-->
-<!--        [data-editorjs-wrapper] {-->
-<!--            border: None !important;-->
-<!--        }-->
-
-<!--    </style>-->
     <!--Контент страницы-->
     <article class="content">
         {% block feed %}
@@ -24,7 +15,6 @@
                                         {% csrf_token %}
                                         {{ comment_form.as_p }}
                                         <br>
-<!--                                        <button class="submit-button" type="submit" value="">Опубликовать</button>-->
                                             <input class="submit-button" type="submit" value="Опубликовать">
                                         <br>
                                         <br>

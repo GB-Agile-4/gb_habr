@@ -55,18 +55,17 @@
                             {% else %}
                                 <a class="" style=""
                                     href="{% url 'comment:add' article.pk %}">
-                                    Добавьте новый комментарий
+                                    Добавить комментарий >>
                                 </a>
 
                                 <br>
-<!--                                <form action="." method="post">-->
-<!--                                    {% csrf_token %}-->
-<!--                                    {{ comment_form.as_p }}-->
-<!--                                    <p><input type="submit" value="Добавить"></p>-->
-<!--                                </form>-->
                             {% endif %}
                         {% else %}
-                            <h4>Авторизируйтесь, чтобы написать комментарий</h4>
+                            <a class="" style="" href=" {% url 'auth:login' %}">
+                                    Для добавления комментария
+                                    <br>
+                                     АВТОРИЗУЙТЕСЬ >>
+                            </a>
                         {% endif %}
                 </div>
         </div>
