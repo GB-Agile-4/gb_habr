@@ -11,6 +11,8 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     is_moderated = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    likes = models.IntegerField(default=0, verbose_name='like')
+    dislikes = models.IntegerField(default=0, verbose_name='dislike')
 
     class Meta:
         ordering = ('created_at', )
