@@ -75,7 +75,7 @@
                                 <br>
                             {% endif %}
                         {% else %}
-                            <a class="" style="" href=" {% url 'auth:login' %}">
+                            <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
                                     Для добавления комментария
                                     <br>
                                      АВТОРИЗУЙТЕСЬ >>

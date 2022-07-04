@@ -26,7 +26,7 @@
                     </a>
                     <a href=" {% url 'auth:logout' %}" class="main-user-item main-menu-item-hover">Выйти</a>
                     {% else %}
-                    <a href=" {% url 'auth:login' %}" class="main-user-item main-menu-item-hover">Войти</a>
+                   <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}" class="main-user-item main-menu-item-hover">Войти</a>
                     <a href=" {% url 'auth:register' %}" class="main-user-item main-menu-item-hover">Регистрация</a>
                     {% endif %}
                 </div>
