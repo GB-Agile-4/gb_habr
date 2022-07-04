@@ -67,6 +67,7 @@ class Article(models.Model):
     likes = models.IntegerField(default=0, verbose_name='like')
     dislikes = models.IntegerField(default=0, verbose_name='dislike')
     rating = models.IntegerField(default=0, verbose_name='рейтинг')
+    views = models.PositiveIntegerField(default=0, verbose_name='просмотры')
 
     def __str__(self):
         return f'{self.title} ({self.category.name}) {self.author} {self.likes} {self.dislikes}'

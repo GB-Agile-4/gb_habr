@@ -16,47 +16,13 @@
 
             </ul>
         </div>
-        <div class="button-wrapper">
-            <!--TODO: выпадающее меню-->
-            <button type="button" class="spoiler">Все подряд</button>
-        </div>
     </section>
     {% endblock %}
     {% block feed %}
     <!--Обёртка для статей в ленте-->
     <div class="articles-list">
         {% for article in articles %}
-        {% if article.is_moderated and article.is_active %}
-        <article class="articles-list-item">
-            <div class="article-snippet">
-                <div class="article-snippet-meta">
-                            <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt=""></a>
-                            <a href=" {% url 'user:account' article.author.username %}" class="article-snippet-author">{{ article.author }}</a>
-                            <span class="article-snippet-published">
-                                <time>{{ article.created_at }}</time>
-                            </span>
-                        </div>
-                <h2 class="article-snippet-title">
-                    <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
-                </h2>
-                <section id={{ article.id }}></section>
-                {% include 'articleapp/includes/article_body_script_preview.html' %}
-            </div>
-            <div class="article-icons">
-                <!--TODO: допилить иконки-->
-                <div>
-                    <div class="votes-meter">Голоса</div>
-                </div>
-                <div><span class="icon-counter" title="Количество просмотров">Просмотры</span></div>
-                <div>
-                    <button title="Добавить в закладки">В закладки</button>
-                </div>
-                <div>
-                    <div class="comments-counter-link" title="Читать комментарии">Комменты</div>
-                </div>
-            </div>
-        </article>
-        {% endif %}
+            {% include 'articleapp/includes/inc_article_preview.html' %}
         {% endfor %}
     </div>
     {% endblock %}

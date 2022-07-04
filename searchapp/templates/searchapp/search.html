@@ -36,18 +36,7 @@
     <div class="articles-list">
         {% for article in articles %}
         {% if article.is_active %}
-        <article id={{ article.pk }} class="articles-list-item">
-            <div class="article-snippet">
-                <div class="article-snippet-meta">
-                    <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt=""></a>
-                    <a href="" class="article-snippet-author">{{ article.author }}</a>
-                    <a href="/article/{{article.pk}}/" class="article-snippet-title-link">{{ article.title }}</a>
-                    <span class="article-snippet-published">
-                                    <time>{{ article.created_at }}</time>
-                                </span>
-                </div>
-            </div>
-        </article>
+            {% include 'articleapp/includes/inc_article_preview.html' %}
         {% endif %}
         {% endfor %}
     </div>
