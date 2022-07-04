@@ -2,8 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import requires_csrf_token
+from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
+import datetime
 
-from commentapp.forms import CommentCreateForm
+
 from .models import Article
 from .models import ArticleCategory
 from .forms import ArticleCreateForm
@@ -17,7 +21,7 @@ class ArticleCategoryView(ListView):
 
 class ArticleView(ListView):
     model = Article
-    queryset = Article.objects.all()
+    queryset = Article.objects.filter(is_active=True, is_moderated=True).order_by('-created_at')
 
 
 def article_detail(request, pk):
@@ -42,6 +46,7 @@ class ArticleCreateView(CreateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['category'] = ArticleCategoryView.queryset
+        ctx['time'] = datetime.datetime.now()
         return ctx
 
     def form_valid(self, form):
@@ -69,3 +74,28 @@ class ArticleUpdateView(UpdateView):
         self.object.is_moderated = False
         self.object.save()
         return super().post(request, *args, **kwargs)
+
+
+@requires_csrf_token
+def upload_image_view(request):
+    f = request.FILES['image']
+    fs = FileSystemStorage()
+    fs.location += '/images/'
+    filename = str(f).split('.')[0]
+    file = fs.save(filename, f)
+    file_url = '/media/images/' + filename
+
+
+    return JsonResponse({'success': 1, 'file': {'url': file_url}})
+
+@requires_csrf_token
+def upload_file_view(request):
+    f = request.FILES['file']
+    fs = FileSystemStorage()
+    fs.location += '/files/'
+    filename, ext = str(f).split('.')
+    file = fs.save(filename, f)
+    file_url = '/media/images/' + filename
+
+    return JsonResponse({'success': 1, 'file': {'url': file_url, 'size': fs.size(filename), 'name': str(f),
+                                                'extension': ext}})
