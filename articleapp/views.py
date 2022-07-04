@@ -17,7 +17,7 @@ class ArticleCategoryView(ListView):
 
 class ArticleView(ListView):
     model = Article
-    queryset = Article.objects.all()
+    queryset = Article.objects.filter(is_active=True, is_moderated=True).order_by('-created_at')
 
 
 def article_detail(request, pk):

@@ -3,14 +3,36 @@ from django.shortcuts import get_object_or_404
 
 from articleapp.models import ArticleCategory, Article
 
+import datetime
+
+
+def top_articles():
+    one_month = datetime.date.today() - datetime.timedelta(days=30)
+    top_articles = Article.objects.filter(is_active=True,
+                                          is_moderated=True,
+                                          created_at__gt=one_month).order_by('-rating')[:5]
+    return top_articles
+
+
+
+
+def articles_read_now():
+    seven_days = datetime.date.today() - datetime.timedelta(days=7)
+    articles_read_now = Article.objects.filter(is_active=True,
+                                               is_moderated=True,
+                                               created_at__gt=seven_days).order_by('-views')[:5]
+    return articles_read_now
+
 
 def index(request):
     article_categories = ArticleCategory.objects.all()
-    articles = Article.objects.order_by('-created_at')
+    articles = Article.objects.filter(is_active=True, is_moderated=True).order_by('-created_at')
 
     context = {
         'article_categories': article_categories,
-        'articles': articles
+        'articles': articles,
+        'articles_read_now': articles_read_now(),
+        'top_articles': top_articles()
     }
 
     return render(request, 'mainapp/index.html', context=context)
@@ -30,19 +52,11 @@ def articles(request, pk):
     context = {
         'article_categories': article_categories,
         'category_item': category_item,
-        'articles': articles
+        'articles': articles,
+        'articles_read_now': articles_read_now()
     }
 
     return render(request, 'mainapp/index.html', context=context)
-
-
-def hubs(request):
-    article_categories = ArticleCategory.objects.all()
-
-    context = {
-        'article_categories': article_categories
-    }
-    return render(request, 'mainapp/hubs.html', context=context)
 
 
 def help(request):
