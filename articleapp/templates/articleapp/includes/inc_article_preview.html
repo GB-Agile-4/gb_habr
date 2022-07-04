@@ -1,0 +1,46 @@
+{% load static %}
+{% load my_tags %}
+
+<article class="articles-list-item">
+    <div class="article-snippet">
+        <div class="article-snippet-meta">
+            <a class="article-snippet-userpic">
+                <img src="{{ article.author.avatar|default_avatar }}" alt="">
+            </a>
+            <a href=" {% url 'user:account' article.author.username %}"
+               class="article-snippet-author">{{ article.author }}
+            </a>
+            <span class="article-snippet-published">
+                <time>{{ article.created_at }}</time>
+            </span>
+        </div>
+        <h2 class="article-snippet-title">
+            <a href=" {% url 'article:article_detail' article.pk %}"
+               class="article-snippet-title-link">{{ article.title }}
+            </a>
+        </h2>
+        <section id={{ article.id }}></section>
+        {% include 'articleapp/includes/article_body_script_preview.html' %}
+    </div>
+    <div class="article-icons">
+        <div>
+             <span> <img style="height: 20px" src="{% static 'img/rating.jpg' %}" alt=""> </span>
+            <span class="icon-counter"> {{article.rating }} </span>
+        </div>
+        <div>
+            <span> <img style="height: 20px" src="{% static 'img/views.png' %}" alt=""> </span>
+            <span class="icon-counter"> {{article.views }} </span>
+        </div>
+        <div>
+            <a href="#">
+                <img style="height: 20px" src="{% static 'img/bookmark.png' %}" alt="">
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'article:article_detail' article.pk %}">
+                <img style="height: 20px" src="{% static 'img/comments.png' %}" alt="">
+            </a>
+            <span class="icon-counter"> {{ article.comments.count }} </span>
+        </div>
+    </div>
+</article>

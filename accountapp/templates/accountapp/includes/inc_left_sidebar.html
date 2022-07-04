@@ -1,7 +1,9 @@
+{% load my_tags %}
+
 <div class="pa-page-person-date">
     <p>
         <img style="height: 200px; width: 200px;"
-             src="{{ MEDIA_URL }}{{ habr_user.avatar }}" alt="{{ habr_user.username }}">
+             src="{{ habr_user.avatar|default_avatar }}" alt="">
     </p>
     <p> {{ habr_user.username }}</p>
     {% if habr_user.first_name%}
