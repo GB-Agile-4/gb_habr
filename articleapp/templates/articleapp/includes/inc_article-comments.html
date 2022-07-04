@@ -37,12 +37,25 @@
                                     <tr>
                                         <td width="50%">
 
-                                            <a class="btn" href="/like/comment_like/{{ comment.pk }}">
-                                                <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
-                                            </a> <span class="lead">{{ comment.likes }}</span>
+                                            {% if user.is_authenticated %}
+                                                <a class="btn" href="/like/comment_like/{{ comment.pk }}">
+                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
+                                                </a> <span class="lead">{{ comment.likes }}</span>
 
-                                            <a class="btn" href="/like/comment_dislike/{{ comment.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
-                                                class="lead">{{ comment.dislikes }}</span></td>
+                                                <a class="btn" href="/like/comment_dislike/{{ comment.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
+                                                    class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
+                                            {% else %}
+                                                <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
+                                                     <span class="lead" style="color:#000000">{{ comment.likes }}</span>
+                                                </a>
+
+                                                <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
+                                                 <span class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
+                                                </a>
+                                            {% endif %}
+
                                         <td width="50%"></td>
                                     </tr>
                                 </table>
