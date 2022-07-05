@@ -13,6 +13,7 @@ class Comment(models.Model):
     is_active = models.BooleanField(default=True)
     likes = models.IntegerField(default=0, verbose_name='like')
     dislikes = models.IntegerField(default=0, verbose_name='dislike')
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
     class Meta:
         ordering = ('created_at', )
@@ -20,3 +21,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Комментарий {self.comment_author} на статью {self.article}'
+

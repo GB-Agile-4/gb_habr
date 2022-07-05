@@ -59,13 +59,27 @@
                                         <td width="50%"></td>
                                     </tr>
                                 </table>
-                {% if comment.comment_author == user or user.is_staff %}
-                <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
-                   href="{% url 'comment:delete' comment.pk %}">
-                    Удалить
-                </a>
-                {% endif %}
+                                {% if comment.comment_author == user or user.is_staff %}
+                                    <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
+                                    href="{% url 'comment:delete' comment.pk %}">
+                                        Удалить
+                                     </a>
+                                {% endif %}
                                 <br>
+
+                                {% for replay in comment.replies.all %}
+                                    <p class="info">{{ replay.comment_author }} | {{ replay.created_at }}</p>
+                                    <li>{{ replay.body }}</li>
+                                {% endfor %}
+
+<!--                                <h5>Replay</h5>-->
+                                <form action="." method="post">
+                                    {{ comment_form.as_p }}
+                                    {% csrf_token %}
+                                    <!-- Hidden input for parent comment.id -->
+                                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                    <a class="btn btn-primary" href="{% url 'comment:add_comment' article.pk %}" type="submit" value="Ответить">Ответить</a>
+                                </form>
 
                             </div>
                         {% empty %}
@@ -80,6 +94,8 @@
                             {% if new_comment %}
                                 <h4>Ваш комментарий добавлен</h4>
                             {% else %}
+                                <br>
+                                <br>
                                 <a class="" style=""
                                     href="{% url 'comment:add' article.pk %}">
                                     Добавить комментарий >>
