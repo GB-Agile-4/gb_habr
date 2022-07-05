@@ -53,7 +53,8 @@ def articles(request, pk):
         'article_categories': article_categories,
         'category_item': category_item,
         'articles': articles,
-        'articles_read_now': articles_read_now()
+        'articles_read_now': articles_read_now(),
+        'top_articles': top_articles()
     }
 
     return render(request, 'mainapp/index.html', context=context)

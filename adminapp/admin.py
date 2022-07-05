@@ -9,7 +9,10 @@ class ArticleAdmin(admin.ModelAdmin):
 #     list_filter = ('category', 'author', 'created_at', 'updated_at', 'is_active', 'is_moderated')
     list_filter = ('author', 'is_active','is_moderated')
     search_fields = ('title', 'body')
+    
 
+class HabrUserAdmin(admin.ModelAdmin):
+    list_filter = ('is_staff', 'is_banned')
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -20,6 +23,6 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(ArticleCategory)
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(HabrUser)
+admin.site.register(HabrUser, HabrUserAdmin)
 admin.site.register(HabrUserProfile)
 admin.site.register(Comment, CommentAdmin)

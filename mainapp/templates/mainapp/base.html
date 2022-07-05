@@ -10,18 +10,21 @@
     <title>{% block title %} {{ title | title }} {% endblock %}</title>
 
     {% block css %}
-        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-        <link rel="stylesheet" href="/static/fonts/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
+    <script defer src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script defer src="{% static 'js/bootstrap.min.js' %}"></script>
     {% endblock %}
 </head>
 <body>
 <div class="wrapper">
     {% block header %}
-        {% include 'mainapp/includes/inc_header.html' %}
+    {% include 'mainapp/includes/inc_header.html' %}
     {% endblock %}
 
     {% block menu %}
-        {% include 'mainapp/includes/inc_sticky_menu.html' %}
+    {% include 'mainapp/includes/inc_sticky_menu.html' %}
     {% endblock %}
 
     <main class="main">
@@ -31,7 +34,7 @@
     </main>
 
     {% block footer %}
-        {% include 'mainapp/includes/inc_footer.html' %}
+    {% include 'mainapp/includes/inc_footer.html' %}
     {% endblock %}
 </div>
 </body>

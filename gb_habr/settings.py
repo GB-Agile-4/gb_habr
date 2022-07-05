@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'articleapp',
     'accountapp',
     'searchapp',
-    'commentapp',
     'likeapp',
+    'commentapp',
     'moderapp',
-    
+
     'django_editorjs',
 ]
 
@@ -143,3 +143,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.request",
+)

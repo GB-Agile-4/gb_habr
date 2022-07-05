@@ -35,7 +35,7 @@
     {% endif %}
     <div class="articles-list">
         {% for article in articles %}
-        {% if article.is_active %}
+        {% if article.is_active and article.is_moderated%}
             {% include 'articleapp/includes/inc_article_preview.html' %}
         {% endif %}
         {% endfor %}
