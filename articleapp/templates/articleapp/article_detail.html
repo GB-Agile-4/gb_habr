@@ -24,64 +24,65 @@
         </div>
     </section>
     {% endblock %}
-        {% block feed %}
-            <!--Обёртка для статей в ленте-->
-            <div class="articles-list">
-                <div class="articles-list-item">
-                    <div class="article-snippet">
-                                <div class="article-snippet-meta">
-                                    <a href="" class="article-snippet-userpic"><img src="" alt=""></a>
-                                    <a href="" class="article-snippet-author">{{ article.author }}</a>
-                                    <span class="article-snippet-published">
+    {% block feed %}
+    <!--Обёртка для статей в ленте-->
+    <div class="articles-list">
+        <div class="articles-list-item">
+            <div class="article-snippet">
+                <div class="article-snippet-meta">
+                    <a class="article-snippet-userpic">
+                        <img src="{{ article.author.avatar|default_avatar }}" alt="">
+                    </a>
+                    <a href="{% url 'user:account' article.author.username %}" class="article-snippet-author">
+                        {{article.author }}
+                    </a>
+                    <span class="article-snippet-published">
                                             <time datetime="2022-05-27T21:23:45.000Z" title="Вставить МСК время">{{ article.created_at }}</time>
                                         </span>
-                                </div>
-                                <h2 class="article-snippet-title"> {{ article.title}}
-                                </h2>                           
-                                
-                                <section id="article-body"></section>
-                                {% include 'articleapp/includes/article_body_script.html' %}
-                                <br>
-                                <table width="100%">
-                                    <tr>
-                                        <td width="50%">
+                </div>
+                <h2 class="article-snippet-title"> {{ article.title}}
+                </h2>
 
-                                            {% if user.is_authenticated %}
-                                                <a class="btn" href="/like/add_like/{{ article.pk }}">
-                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
-                                                </a> <span class="lead">{{ article.likes }}</span>
+                <section id="article-body"></section>
+                {% include 'articleapp/includes/article_body_script.html' %}
+                <br>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            {% if user.is_authenticated %}
+                            <a class="btn" href="/like/add_like/{{ article.pk }}">
+                                <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x"></i>
+                            </a> <span class="lead">{{ article.likes }}</span>
 
-                                                <a class="btn" href="/like/add_dislike/{{ article.pk }}">
-                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
-                                                </a> <span class="lead">{{ article.dislikes }}</span></td>
+                            <a class="btn" href="/like/add_dislike/{{ article.pk }}">
+                                <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
+                            </a> <span class="lead">{{ article.dislikes }}</span></td>
 
-                                            {% else %}
-                                                <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
-                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
-                                                     <span class="lead" style="color:#000000">{{ article.likes }}</span>
-                                                </a>
+                        {% else %}
+                        <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                            <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x"></i>
+                            <span class="lead" style="color:#000000">{{ article.likes }}</span>
+                        </a>
 
-                                                <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
-                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
-                                                 <span class="lead" style="color:#000000">{{ article.dislikes }}</span></td>
-                                                </a>
-                                            {% endif %}
+                        <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                            <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
+                            <span class="lead" style="color:#000000">{{ article.dislikes }}</span></td>
+                        </a>
+                        {% endif %}
 
-                                        <td width="50%"></td>
-                                    </tr>
-                                </table>
+                        <td width="50%"></td>
+                    </tr>
+                </table>
 
-                    </div>
-                    {% if user == article.author %}
-                        <a class="btn" href="/article/edit/{{ article.pk }}">Редактировать</a>
-                    {% endif %}
+            </div>
+            {% if user == article.author %}
+            <a class="btn" href="/article/edit/{{ article.pk }}">Редактировать</a>
+            {% endif %}
 
-                    {% if user.is_staff or user == article.author %}
+            {% if user.is_staff or user == article.author %}
 
-                        <a class="btn" href="/article/delete/{{ article.pk }}">Удалить</a>
-                    {% endif %}
-
-
+            <a class="btn" href="/article/delete/{{ article.pk }}">Удалить</a>
+            {% endif %}
         </div>
     </div>
     {% endblock %}

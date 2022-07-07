@@ -12,6 +12,9 @@ from .models import Article
 from .models import ArticleCategory
 from .forms import ArticleCreateForm
 
+from mainapp.views import top_articles, articles_read_now
+
+
 
 class ArticleCategoryView(ListView):
     model = ArticleCategory
@@ -28,9 +31,15 @@ def article_detail(request, pk):
     template_name = 'articleapp/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
     comments = article.comments.filter(is_active=True).order_by('-created_at')
+    
+    article.views += 1
+    article.save()
 
     return render(request, template_name, {'article': article,
-                                           'comments': comments})
+                                           'comments': comments,
+                                           'articles_read_now': articles_read_now(),
+                                           'top_articles': top_articles()
+                                           })
 
 
 class ArticleCreateView(CreateView):

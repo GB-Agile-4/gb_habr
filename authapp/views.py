@@ -40,17 +40,31 @@ def logout(request):
 
 
 def register(request):
+    next_param = request.GET.get('next', '')
+
     if request.method == 'POST':
         register_form = HabrUserRegisterForm(request.POST, request.FILES)
 
         if register_form.is_valid():
             register_form.save()
+
+            username = request.POST.get('username')
+            password = request.POST.get('password1')
+            user = auth.authenticate(username=username, password=password)
+
+            if user and user.is_active:
+                auth.login(request, user)
+
+                if 'next' in request.POST:
+                    return HttpResponseRedirect(request.POST['next'])
+
             return HttpResponseRedirect(reverse('mainapp:index'))
     else:
         register_form = HabrUserRegisterForm()
 
     context = {
-        'register_form': register_form
+        'register_form': register_form,
+        'next': next_param
     }
 
     return render(request, 'authapp/register.html', context)
