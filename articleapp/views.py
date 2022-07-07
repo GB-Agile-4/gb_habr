@@ -15,6 +15,7 @@ from .forms import ArticleCreateForm
 from mainapp.views import top_articles, articles_read_now
 
 
+
 class ArticleCategoryView(ListView):
     model = ArticleCategory
     context_object_name = 'categories'
