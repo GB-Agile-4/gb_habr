@@ -28,18 +28,25 @@ class ArticleView(ListView):
 
 
 def article_detail(request, pk):
-    template_name = 'articleapp/article_detail.html'
+
+    article_categories = ArticleCategory.objects.all()
     article = get_object_or_404(Article, pk=pk)
     comments = article.comments.filter(is_active=True).order_by('-created_at')
     
     article.views += 1
     article.save()
 
-    return render(request, template_name, {'article': article,
-                                           'comments': comments,
-                                           'articles_read_now': articles_read_now(),
-                                           'top_articles': top_articles()
-                                           })
+    article.views += 1
+    article.save()
+
+    context = {'article': article,
+               'article_categories': article_categories,
+               'comments': comments,
+               'articles_read_now': articles_read_now(),
+               'top_articles': top_articles()
+               }
+
+    return render(request, 'articleapp/article_detail.html', context)
 
 
 class ArticleCreateView(CreateView):
@@ -63,9 +70,12 @@ class ArticleCreateView(CreateView):
         return super(ArticleCreateView, self).form_valid(form)
 
 
-class ArticleDeleteView(DeleteView):
-    model = Article
-    success_url = '/'
+def article_delete(request, pk):
+
+    article = Article.objects.get(pk=pk)
+    article.delete()
+
+    return HttpResponseRedirect(reverse('mainapp:index'))
 
 
 class ArticleUpdateView(UpdateView):
