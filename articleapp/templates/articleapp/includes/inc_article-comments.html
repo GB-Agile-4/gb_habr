@@ -15,94 +15,99 @@
                         <h2 class="comments-wrapper__title">
                             {% with comments.count as total_comments %}
                             <span class="comments-wrapper__comments-count">
-
                                         <h3>
                                             Комментарии: {{ total_comments }}
-                                            <br>
-                                            <br>
                                         </h3>
                             {% endwith %}
                              </span></h2>
                         {% for comment in comments %}
+
                             <div class="comment">
-                                <h6 class="info">
-                                    {{ comment.comment_author }}
-                                    {{ comment.updated_at}}
-                                </h6>
-                                <h5>
-                                    {{ comment.body|linebreaks }}
-                                </h5>
+                                {% if not comment.parent.id %}
+                                    <h5 class="info">
+                                        {{ comment.comment_author }}
+                                        {{ comment.updated_at}}
+                                    </h5>
+                                    <p>
+                                        {{ comment.body|linebreaks }}
+                                    </p>
+
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="50%">
+                                                {% if user.is_authenticated %}
+                                                    <a class="btn" href="/like/comment_like/{{ comment.pk }}">
+                                                        <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
+                                                    </a> <span class="lead">{{ comment.likes }}</span>
+                                                    <a class="btn" href="/like/comment_dislike/{{ comment.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
+                                                        class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
+                                                {% else %}
+                                                    <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                                                        <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
+                                                         <span class="lead" style="color:#000000">{{ comment.likes }}</span>
+                                                    </a>
+                                                    <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                                                        <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
+                                                     <span class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
+                                                    </a>
+                                                {% endif %}
+                                            <td width="50%"></td>
+                                        </tr>
+                                    </table>
+                                    {% if user.is_authenticated and user != comment.comment_author and not comment.parent.id %}
+                                        <a class="" style=""
+                                            href="{% url 'comment:add_reply' comment.pk %}">
+                                                Ответить >>
+                                        </a>
                                 <br>
-                                <table width="100%">
-                                    <tr>
-                                        <td width="50%">
-
-                                            {% if user.is_authenticated %}
-                                                <a class="btn" href="/like/comment_like/{{ comment.pk }}">
-                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
-                                                </a> <span class="lead">{{ comment.likes }}</span>
-
-                                                <a class="btn" href="/like/comment_dislike/{{ comment.pk }}"><i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a> <span
-                                                    class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
-                                            {% else %}
-                                                <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
-                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x" ></i>
-                                                     <span class="lead" style="color:#000000">{{ comment.likes }}</span>
-                                                </a>
-
-                                                <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
-                                                    <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
-                                                 <span class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
-                                                </a>
-                                            {% endif %}
-
-                                        <td width="50%"></td>
-                                    </tr>
-                                </table>
-                                {% if comment.comment_author == user or user.is_staff %}
-                                    <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
-                                    href="{% url 'comment:delete' comment.pk %}">
-                                        Удалить
-                                     </a>
+                                <br>
+                                    {% endif %}
+                                    {% if user == comment.comment_author or user.is_staff %}
+                                        <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
+                                        href="{% url 'comment:delete' comment.pk %}">
+                                            Удалить
+                                         </a>
+                                    {% endif %}
                                 {% endif %}
-                                <br>
+                                 <div>
 
-                                {% for replay in comment.replies.all %}
-                                    <p class="info">{{ replay.comment_author }} | {{ replay.created_at }}</p>
-                                    <li>{{ replay.body }}</li>
-                                {% endfor %}
+                                    {% for comment_reply in comment.replies.all %}
 
-<!--                                <h5>Replay</h5>-->
-                                <form action="." method="post">
-                                    {{ comment_form.as_p }}
-                                    {% csrf_token %}
-                                    <!-- Hidden input for parent comment.id -->
-                                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                                    <a class="btn btn-primary" href="{% url 'comment:add_comment' article.pk %}" type="submit" value="Ответить">Ответить</a>
-                                </form>
+                                        {% if comment_reply %}
+
+                                            <h5 class="info">
+                                                {{ comment_reply.comment_author }}
+                                                {{ comment_reply.updated_at}}
+                                            </h5>
+
+                                            <p>
+                                                {{ comment_reply.body|linebreaks }}
+                                            </p>
+                                        {% if user == comment_reply.comment_author or user.is_staff %}
+                                            <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
+                                        href="{% url 'comment:delete' comment.pk %}">
+                                            Удалить
+                                             </a>
+                                        {% endif %}
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </div>
+
 
                             </div>
+
                         {% empty %}
-                            <br>
-                            <br>
                             <p>Пока комментариев нет</p>
-                            <br>
-                            <br>
+
                         {% endfor %}
 
                         {% if user.is_authenticated %}
-                            {% if new_comment %}
-                                <h4>Ваш комментарий добавлен</h4>
-                            {% else %}
-                                <br>
-                                <br>
                                 <a class="" style=""
                                     href="{% url 'comment:add' article.pk %}">
                                     Добавить комментарий >>
                                 </a>
-
-                                <br>
-                            {% endif %}
                         {% else %}
                             <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
                                     Для добавления комментария
