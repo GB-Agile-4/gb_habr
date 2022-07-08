@@ -1,12 +1,14 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from commentapp.models import Comment
 from .models import Mark, CommentMark
 from articleapp.models import Article
 
 
+@login_required()
 def add_like(request, pk):
     article = get_object_or_404(Article, pk=pk)
 
@@ -35,6 +37,7 @@ def add_like(request, pk):
     return HttpResponseRedirect(reverse('article:article_detail', args=(pk, )))
 
 
+@login_required()
 def add_dislike(request, pk):
     article = get_object_or_404(Article, pk=pk)
 
@@ -63,6 +66,7 @@ def add_dislike(request, pk):
     return HttpResponseRedirect(reverse('article:article_detail', args=(pk, )))
 
 
+@login_required()
 def comment_like(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
 
@@ -91,6 +95,7 @@ def comment_like(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required()
 def comment_dislike(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
 

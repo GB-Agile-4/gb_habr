@@ -25,7 +25,6 @@
         </div>
         <hr>
         <div>
-            {% if articles %}
             {% for article in articles %}
             <article class="articles-list-item">
                 <div class="article-snippet">
@@ -55,17 +54,12 @@
 
                 </div>
             </article>
-            {% endfor %}
-            {% else %}
-
+            {% empty %}
             <div class="articles-list-item"> Публикации отсутствуют!</div>
-
-            {% endif %}
-
-
+            {% endfor %}
             </article>
         </div>
-    {% endif %}
+        {% endif %}
     </div>
     {% endblock %}
 </div>
