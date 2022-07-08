@@ -39,6 +39,18 @@
                 <a href="{% url 'user:account' user.username %}" class="main-user-item main-menu-item-hover">
                     {{ user.username }}
                 </a>
+                
+                <a class="btn" href="{% url 'user:account' user.username %}">
+                    <i style="color:#fa8e47" class="fa fa-bell fa-1x"></i>
+                    </a>
+                    {% with user.notifications.count as unread_total %}
+                    <span style="color:#fa8e47" class="lead">{{ unread_total }}</span>
+                    {% endwith %}
+
+                    <a class="btn" href="/notification/read/">
+                    <i style="color:#fa8e47" class="fa fa-check fa-1x"></i>
+                    </a>
+                    
                 <a href=" {% url 'auth:logout' %}" class="main-user-item main-menu-item-hover">Выйти</a>
                 {% else %}
                 <a href=" {% url 'auth:login' %}?next={{request.path}}"

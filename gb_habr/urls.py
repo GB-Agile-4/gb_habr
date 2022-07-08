@@ -21,6 +21,7 @@ urlpatterns = [
     path('like/', include('likeapp.urls', namespace='like')),
     path('moder/', include('moderapp.urls', namespace='moder')),
     path('comment/', include('commentapp.urls', namespace='comment')),
+    path('notification/', include('notificationapp.urls', namespace='notification')),
 
 ]
 
