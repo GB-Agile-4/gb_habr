@@ -28,7 +28,7 @@ def personal_area(request, slug):
         'habr_user': habr_user,
         'notifications': notifications,
         'total_unread_number': total_unread_number,
-        "articles_unread_number": articles_unread_number
+        "articles_unread_number": articles_unread_number,
         'ban_expires': ban_expires
     }
 
