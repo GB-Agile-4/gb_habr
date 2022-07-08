@@ -2,6 +2,7 @@ from django.contrib import admin
 from articleapp.models import Article, ArticleCategory
 from authapp.models import HabrUser, HabrUserProfile
 from commentapp.models import Comment
+from notificationapp.models import Notification
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -26,3 +27,4 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(HabrUser, HabrUserAdmin)
 admin.site.register(HabrUserProfile)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Notification)
