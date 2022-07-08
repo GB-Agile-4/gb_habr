@@ -42,18 +42,19 @@ def articles(request, pk):
     article_categories = ArticleCategory.objects.all()
 
     if pk == 0:
-        articles = Article.objects.order_by('-created_at')
+        articles = Article.objects.filter(is_active=True, is_moderated=True).order_by('-created_at')
         category_item = {'name': 'Все потоки',
                          'pk': 0}
     else:
         category_item = get_object_or_404(ArticleCategory, pk=pk)
-        articles = Article.objects.filter(category__pk=pk).order_by('-created_at')
+        articles = Article.objects.filter(is_active=True, is_moderated=True, category__pk=pk).order_by('-created_at')
 
     context = {
         'article_categories': article_categories,
         'category_item': category_item,
         'articles': articles,
-        'articles_read_now': articles_read_now()
+        'articles_read_now': articles_read_now(),
+        'top_articles': top_articles()
     }
 
     return render(request, 'mainapp/index.html', context=context)

@@ -6,15 +6,17 @@
 <article class="content">
     {% block content_topsection %}
     <section class="top-section">
-        <div class="section-name">
+        <div class="section-name tabs-wrapper">
+            {% if category_item %}
+            <h1>{{ category_item.name }}</h1>
+            {% else %}
             <h1>Все потоки</h1>
-        </div>
-        <div class="tabs-wrapper">
-            <ul>
-                <li class="tab-item"><a href=" {% url 'mainapp:articles' 0 %}" class="tab-active">Статьи</a></li>
-                <li class="tab-item"><a href=" {% url 'mainapp:help' %}">Помощь</a></li>
-
-            </ul>
+            {% endif %}
+           <form class="form-inline my-2 my-lg-0" action="{% url 'search:search' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="text" name="title" placeholder="Поиск" value="{{ query }}" id="">
+                <input class="btn btn-outline-success my-2 my-sm-0" type="image" src="{{ MEDIA_URL }}searchapp/icon-searchapp.svg">
+            </form>
         </div>
     </section>
     {% endblock %}

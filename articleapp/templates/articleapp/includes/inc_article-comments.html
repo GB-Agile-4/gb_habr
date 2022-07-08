@@ -1,4 +1,3 @@
-
 {#TODO: Доработать css стили для comments#}
 
 {#<div class="articles-list">#}
@@ -114,7 +113,31 @@
                                     <br>
                                      АВТОРИЗУЙТЕСЬ >>
                             </a>
-                        {% endif %}
-                </div>
+                            <span class="lead" style="color:#000000">{{ comment.dislikes }}</span>
+                        </td>
+                        <td width="50%">
+                            {% if comment.comment_author == user or user.is_staff %}
+                            <button type="button" class="btn btn-outline-danger" style="float: right;"
+                                    data-toggle="modal" data-target="#delete_comment">
+                                Удалить
+                            </button>
+                            {% include 'articleapp/includes/inc_comment_delete.html' %}
+                            {% endif %}
+                        </td>
+                     </tr>
+                </table>
+            </div>
+            {% empty %}
+            <br>
+            <br>
+            <p>Пока комментариев нет</p>
+            <br>
+            <br>
+            {% endfor %}
+            <a class="btn btn-outline-secondary"
+               href="{% url 'comment:add' article.pk %}">
+                Добавить комментарий
+            </a>
         </div>
+    </div>
 </div>
