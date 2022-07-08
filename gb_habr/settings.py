@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'likeapp',
     'commentapp',
     'moderapp',
+    'notificationapp',
 
     'django_editorjs',
 ]

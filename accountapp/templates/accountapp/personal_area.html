@@ -8,7 +8,8 @@
         {% if habr_user == user and habr_user.is_banned %}
         <p style="color: red; font-weight: bolder;">Вас забанили!<br>
             Вы больше не можете публиковать статьи и писать комментарии!<br>
-            Просьба обратиться к администрации!
+            Просьба обратиться к администрации!<br>
+            Дней до окончания блокировки: {{ ban_expires }}
         </p>
         {% else %}
         <div style="margin: 20px">
@@ -35,7 +36,6 @@
                         <a href="{% url 'article:article_detail' article.pk %}"
                            class="article-snippet-title-link">{{ article.title }}</a>
                     </h2>
-
                     <section id="{{ article.id }}"></section>
                     {% include 'articleapp/includes/article_body_script_preview.html' %}
                     <span>Статус:</span>
@@ -51,15 +51,21 @@
                     {% if not article.is_moderated and not article.reject_moderation%}
                     <span> На модерации.</span>
                     {% endif %}
-
+                    <div>
+                    <br>
+                    <i style="color:#fa8e47" class="fa fa-bell fa-1x"></i>
+                    {% with article.notifications.count as unread %}
+                        <span style="color:#fa8e47" class="lead">{{ unread }}</span>
+                    {% endwith %}
+                    </div>
                 </div>
             </article>
             {% empty %}
             <div class="articles-list-item"> Публикации отсутствуют!</div>
             {% endfor %}
-            </article>
         </div>
         {% endif %}
     </div>
-    {% endblock %}
 </div>
+{% endblock %}
+
