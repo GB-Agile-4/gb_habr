@@ -6,4 +6,4 @@ psycopg2-binary==2.9.3
 sqlparse==0.4.2
 tzdata==2022.1
 apscheduler
-pip install django-notifications-hq
+django-notifications-hq
