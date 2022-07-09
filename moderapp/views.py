@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler as BS
+from notifications.signals import notify
 
 from articleapp.models import Article
 from authapp.models import HabrUser
@@ -37,6 +38,10 @@ def ban_user(request, pk):
         habr_user.banned_till = time_now + timedelta(days=14)
         print(habr_user.banned_till)
 
+        notify.send(request.user, recipient=habr_user, action_object=habr_user, description='habr_user',
+                    verb=f'Вы нарушили правила сайта и теперь вы не можете писать статьи, \
+                     оставлять комментарии и ставить лайки в течение следующих 2 недель.')
+
     habr_user.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -67,6 +72,9 @@ def confirm_moderate_post(request, pk):
 
     article.is_moderated = True
     article.save()
+
+    notify.send(request.user, recipient=article.author, action_object=article, description='article',
+                verb=f'Ваша статья {article.title} успешно прошла модерацию.')
 
     return HttpResponseRedirect(reverse('moderapp:moderate_list'))
 

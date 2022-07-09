@@ -13,8 +13,11 @@
     {% if habr_user.last_name %}
     <li class="list-group-item"> Фамилия: {{habr_user.last_name}}</li>
     {% endif %}
+    </ul>
     {% if habr_user == user %}
-        </ul>
+        <a class="pa-button-profile" href="{% url 'user:notifications'%}">
+            Уведомления
+        </a>
         <a class="btn btn-outline-dark pa-button-profile" href="{% url 'auth:edit'%}?next={{request.path}}">
             Редактировать профиль
         </a>
