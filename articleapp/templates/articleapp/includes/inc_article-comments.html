@@ -1,4 +1,4 @@
- <div class="articles-list">
+<div class="articles-list">
     <div class="articles-list-item">
         <div class="article-snippet">
             <h2 class="comments-wrapper__title">
@@ -11,49 +11,111 @@
                              </span></h2>
             {% for comment in comments %}
             <div class="comment">
-                <h6 class="info">
+                {% if not comment.parent.id %}
+                <h5 class="info">
                     {{ comment.comment_author }}
                     {{ comment.updated_at}}
-                </h6>
-                <h5>
-                    {{ comment.body|linebreaks }}
                 </h5>
-                <br>
+                <p>
+                    {{ comment.body|linebreaks }}
+                </p>
+
                 <table width="100%">
                     <tr>
                         <td width="50%">
-                            <a class="btn" href="{% url 'like:comment_like' comment.pk %}">
+                            {% if user.is_authenticated %}
+                            <a class="btn" href="/like/comment_like/{{ comment.pk }}">
                                 <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x"></i>
-                            </a>
-                            <span class="lead">{{ comment.likes }}</span>
-                            <a class="btn" href="{% url 'like:comment_dislike' comment.pk %}">
-                                <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
-                            </a>
-                            <span class="lead" style="color:#000000">{{ comment.dislikes }}</span>
-                        </td>
-                        <td width="50%">
-                            {% if comment.comment_author == user or user.is_staff %}
-                            <button type="button" class="btn btn-outline-danger" style="float: right;"
-                                    data-toggle="modal" data-target="#delete_comment">
-                                Удалить
-                            </button>
-                            {% include 'articleapp/includes/inc_comment_delete.html' %}
-                            {% endif %}
-                        </td>
-                     </tr>
+                            </a> <span class="lead">{{ comment.likes }}</span>
+                            <a class="btn" href="/like/comment_dislike/{{ comment.pk }}"><i style="color:#000000"
+                                                                                            class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i></a>
+                            <span
+                                    class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
+                        {% else %}
+                        <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                            <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x"></i>
+                            <span class="lead" style="color:#000000">{{ comment.likes }}</span>
+                        </a>
+                        <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                            <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
+                            <span class="lead" style="color:#000000">{{ comment.dislikes }}</span></td>
+                        </a>
+                        {% endif %}
+                        <td width="50%"></td>
+                    </tr>
                 </table>
+                {% if user.is_authenticated and user != comment.comment_author and not comment.parent.id %}
+                <a class="" style=""
+                   href="{% url 'comment:add_reply' comment.pk %}">
+                    Ответить >>
+                </a>
+                <br>
+                <br>
+                {% endif %}
+                {% if user == comment.comment_author or user.is_staff %}
+                <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
+                   href="{% url 'comment:delete' comment.pk %}">
+                    Удалить
+                </a>
+                {% endif %}
+                {% endif %}
+                <div>
+
+                    {% for comment_reply in comment.replies.all %}
+
+                    {% if comment_reply %}
+
+                    <h5 class="info">
+                        {{ comment_reply.comment_author }}
+                        {{ comment_reply.updated_at}}
+                    </h5>
+
+                    <p>
+                        {{ comment_reply.body|linebreaks }}
+                    </p>
+                    {% if user == comment_reply.comment_author or user.is_staff %}
+                    <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
+                       href="{% url 'comment:delete' comment.pk %}">
+                        Удалить
+                    </a>
+                    {% endif %}
+                    {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
             </div>
+
             {% empty %}
-            <br>
-            <br>
             <p>Пока комментариев нет</p>
-            <br>
-            <br>
+
             {% endfor %}
+
+            {% if user.is_authenticated %}
             <a class="btn btn-outline-secondary"
-               href="{% url 'comment:add' article.pk %}">
-                Добавить комментарий
+           href="{% url 'comment:add' article.pk %}">
+            Добавить комментарий
             </a>
+            {% else %}
+            <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
+                Для добавления комментария
+                <br>
+                АВТОРИЗУЙТЕСЬ >>
+            </a>
+            {% endif %}
+            <td width="50%">
+                {% if comment.comment_author == user or user.is_staff %}
+                <button type="button" class="btn btn-outline-danger" style="float: right;"
+                        data-toggle="modal" data-target="#delete_comment">
+                    Удалить
+                </button>
+                {% include 'articleapp/includes/inc_comment_delete.html' %}
+                {% endif %}
+            </td>
+            </tr>
+            </table>
         </div>
     </div>
 </div>
