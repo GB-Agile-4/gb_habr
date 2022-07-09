@@ -17,7 +17,7 @@
                     {% endif %}
                     </p>
                     <p> {{ notification.timestamp }} </p>
-                    <a class="pa-button-article" href="{% url 'user:notifications-delete' notification.pk %}">прочитано</a>
+                    <a class="btn btn-outline-success" href="{% url 'user:notifications-delete' notification.pk %}">прочитано</a>
                 </div>
                 <hr>
                 {% empty %}

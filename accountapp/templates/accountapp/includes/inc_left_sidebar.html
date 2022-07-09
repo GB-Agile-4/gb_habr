@@ -13,9 +13,9 @@
     {% if habr_user.last_name %}
     <li class="list-group-item"> Фамилия: {{habr_user.last_name}}</li>
     {% endif %}
-    </ul>
+        </ul>
     {% if habr_user == user %}
-        <a class="pa-button-profile" href="{% url 'user:notifications'%}">
+        <a class="btn btn-outline-dark pa-button-profile" href="{% url 'user:notifications'%}">
             Уведомления
         </a>
         <a class="btn btn-outline-dark pa-button-profile" href="{% url 'auth:edit'%}?next={{request.path}}">

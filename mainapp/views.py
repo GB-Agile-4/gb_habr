@@ -55,4 +55,8 @@ def articles(request, pk):
 
 
 def help(request):
-    return render(request, 'mainapp/help.html')
+    context = {
+        'articles_read_now': articles_read_now(),
+        'top_articles': top_articles()
+    }
+    return render(request, 'mainapp/help.html', context)

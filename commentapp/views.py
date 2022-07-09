@@ -47,6 +47,9 @@ def add_comment(request, pk):
             notify.send(request.user, recipient=article.author, action_object=article, description='article',
                         verb=f'Вашей статье {article.title} оставил комментарий пользователь {request.user.get_full_name()}.')
 
+
+        return HttpResponseRedirect(reverse('article:article_detail', args=[pk]))
+
     else:
         comment_form = CommentCreateForm()
 
@@ -70,6 +73,7 @@ def add_comment_reply(request, pk):
             new_comment_reply.comment_author = request.user
             new_comment_reply.save()
 
+
             if new_comment_reply.comment_author != new_comment_reply.article.author:
                 notification = Notification(article=new_comment_reply.article,
                                             article_author=new_comment_reply.article.author,
@@ -87,8 +91,12 @@ def add_comment_reply(request, pk):
             notify.send(request.user, recipient=article.author, action_object=article, description='article',
                         verb=f'На ваш комментарий к статье {article.title} оставил ответ пользователь {request.user.get_full_name()}.')
 
+
+            return HttpResponseRedirect(reverse('article:article_detail', args=[pk]))
+
     else:
         comment_form = CommentCreateForm()
 
     return render(request, template_name, {'article': article,
+                                           'comment': comment,
                                            'comment_form': comment_form})
