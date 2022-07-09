@@ -18,7 +18,8 @@ class ArticleCreateForm(forms.ModelForm):
                 field.widget.attrs['class'] = 'article_editor_title'
                 field.label = False
             if field_name == 'category':
-                field.label = 'Хабы'
+                field.widget.attrs['class'] = 'col-form-label'
+                field.label = 'Категория'
 
             # field.widget.attrs['class'] = 'form-control articleapp-form'
             # field.help_text = ''

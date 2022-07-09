@@ -29,18 +29,13 @@ class ArticleView(ListView):
 
 def article_detail(request, pk):
 
-    article_categories = ArticleCategory.objects.all()
     article = get_object_or_404(Article, pk=pk)
     comments = article.comments.filter(is_active=True).order_by('-created_at')
-    
-    article.views += 1
-    article.save()
 
     article.views += 1
     article.save()
 
     context = {'article': article,
-               'article_categories': article_categories,
                'comments': comments,
                'articles_read_now': articles_read_now(),
                'top_articles': top_articles()
@@ -61,8 +56,10 @@ class ArticleCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx['articles_read_now'] = articles_read_now()
+        ctx['top_articles'] = top_articles()
         ctx['category'] = ArticleCategoryView.queryset
-        ctx['time'] = datetime.datetime.now()
+        ctx['time'] = datetime.datetime.now().time()
         return ctx
 
     def form_valid(self, form):

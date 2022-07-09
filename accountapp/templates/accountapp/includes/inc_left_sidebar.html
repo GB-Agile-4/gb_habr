@@ -1,45 +1,45 @@
 {% load my_tags %}
 
 <div class="pa-page-person-date">
-    <p>
+    <ul class="list-group" >
+    <li class="list-group-item">
         <img style="height: 200px; width: 200px;"
              src="{{ habr_user.avatar|default_avatar }}" alt="">
-    </p>
-    <p> {{ habr_user.username }}</p>
+    </li>
+    <li class="list-group-item"> {{ habr_user.username }}</li>
     {% if habr_user.first_name%}
-    <p> Имя: {{habr_user.first_name}}</p>
+    <li class="list-group-item"> Имя: {{habr_user.first_name}}</li>
     {% endif %}
     {% if habr_user.last_name %}
-    <p> Фамилия: {{habr_user.last_name}}</p>
+    <li class="list-group-item"> Фамилия: {{habr_user.last_name}}</li>
     {% endif %}
+    </ul>
     {% if habr_user == user %}
-    <p>
         <a class="pa-button-profile" href="{% url 'user:notifications'%}">
             Уведомления
         </a>
-        <a class="pa-button-profile" href="{% url 'auth:edit'%}">
+        <a class="btn btn-outline-dark pa-button-profile" href="{% url 'auth:edit'%}?next={{request.path}}">
             Редактировать профиль
         </a>
-        <a class="pa-button-profile" href="{% url 'auth:logout'%}">
+        <a class="btn btn-outline-dark pa-button-profile" href="{% url 'auth:logout'%}">
             Выйти
         </a>
-    </p>
     {% if habr_user.is_staff %}
     <br>
-    <h3> Меню модератора</h3>
-    <a class="pa-button-profile" href="{% url 'moder:moderate_list'%}">
+    <h3 style="margin-top: 30px; border-top: 1px solid black;">Меню модератора</h3>
+    <a class="btn btn-outline-dark pa-button-profile" href="{% url 'moder:moderate_list'%}">
         Статьи на модерацию
     </a>
     {% endif %}
     {% else %}
     {% if user.is_staff %}
     {% if habr_user.is_banned %}
-    <a class="pa-button-profile" style="background-color: #008000;"
+    <a class="btn btn-outline-success pa-button-profile"
        href="{% url 'moder:ban_user' habr_user.pk %}">
         Разблокировать пользователя
     </a>
     {% else %}
-    <a class="pa-button-profile" style="background-color: #ff0000;"
+    <a class="btn btn-outline-danger pa-button-profile"
        href="{% url 'moder:ban_user' habr_user.pk %}">
         Заблокировать пользователя
     </a>

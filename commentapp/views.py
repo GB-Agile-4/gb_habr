@@ -32,6 +32,11 @@ def add_comment(request, pk):
             new_comment.article = article
             new_comment.comment_author = request.user
             new_comment.save()
+
+            if new_comment.comment_author != new_comment.article.author:
+                notification = Notification(article=new_comment.article, article_author=new_comment.article.author,comment_author=new_comment.comment_author)
+                notification.save()
+
             comment_form = CommentCreateForm()
 
             comment_text = new_comment.body
@@ -64,6 +69,13 @@ def add_comment_reply(request, pk):
             new_comment_reply.parent = comment
             new_comment_reply.comment_author = request.user
             new_comment_reply.save()
+
+            if new_comment_reply.comment_author != new_comment_reply.article.author:
+                notification = Notification(article=new_comment_reply.article,
+                                            article_author=new_comment_reply.article.author,
+                                            comment_author=new_comment_reply.comment_author)
+                notification.save()
+
             comment_form = CommentCreateForm()
 
             reply_text = new_comment_reply.body

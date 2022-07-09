@@ -42,7 +42,6 @@
                 <a href="{% url 'user:account' user.username %}" class="main-user-item main-menu-item-hover nav-link">
                     {{ user.username }}
                 </a>
-
                 <a href="{% url 'user:notifications' %}" class="main-user-item main-menu-item-hover nav-link">
                     {%  notifications_unread as unread_count %}
                     {% if unread_count %}
