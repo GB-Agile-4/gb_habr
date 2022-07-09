@@ -52,8 +52,7 @@
                         <i style="color: #909090" class="fa fa-bell fa-1x"></i>
                     {% endif %}
                 </a>
-                    
-                <a href=" {% url 'auth:logout' %}" class="main-user-item main-menu-item-hover">Выйти</a>
+                <a href=" {% url 'auth:logout' %}" class="main-user-item main-menu-item-hover nav-link">Выйти</a>
                 {% else %}
                 <a href=" {% url 'auth:login' %}?next={{request.path}}"
                    class="main-user-item main-menu-item-hover">
