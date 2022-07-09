@@ -8,15 +8,8 @@ from notificationapp.models import Notification
 
 def personal_area(request, slug):
     articles = Article.objects.filter(author__username=slug)
-    all_users = HabrUser.objects.all()
     habr_user = HabrUser.objects.get(username=slug)
 
-<<<<<<< HEAD
-    context = {
-        'articles': articles,
-        'all_users': all_users,
-        'habr_user': habr_user
-=======
     notifications = Notification.objects.filter(article_author=habr_user).exclude(comment_author=habr_user)
     total_unread_number = notifications.count()
     articles_unread_number = {}
@@ -37,7 +30,6 @@ def personal_area(request, slug):
         'total_unread_number': total_unread_number,
         "articles_unread_number": articles_unread_number,
         'ban_expires': ban_expires
->>>>>>> develop
     }
 
     return render(request, 'accountapp/personal_area.html', context=context)

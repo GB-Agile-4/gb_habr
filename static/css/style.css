@@ -587,7 +587,7 @@ svg {
 }
 
 .comment {
-    border:1px solid #EAEAEA;
+    border-top: 1px solid #AEA6A6;
     margin: 15px 0px;
     padding: 10px;
 }

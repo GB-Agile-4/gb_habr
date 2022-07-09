@@ -40,14 +40,14 @@
                     {{ user.username }}
                 </a>
                 
-                <a class="btn" href="{% url 'user:account' user.username %}">
+                <a class="btn main-user-item" href="{% url 'user:account' user.username %}">
                     <i style="color:#fa8e47" class="fa fa-bell fa-1x"></i>
                     </a>
                     {% with user.notifications.count as unread_total %}
-                    <span style="color:#fa8e47" class="lead">{{ unread_total }}</span>
+                    <span style="color:#fa8e47" class="lead main-user-item">{{ unread_total }}</span>
                     {% endwith %}
 
-                    <a class="btn" href="/notification/read/">
+                    <a class="btn main-user-item" href="/notification/read/">
                     <i style="color:#fa8e47" class="fa fa-check fa-1x"></i>
                     </a>
                     

@@ -31,9 +31,6 @@ def article_detail(request, pk):
 
     article = get_object_or_404(Article, pk=pk)
     comments = article.comments.filter(is_active=True).order_by('-created_at')
-    
-    article.views += 1
-    article.save()
 
     article.views += 1
     article.save()
