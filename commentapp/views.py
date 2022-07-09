@@ -48,7 +48,7 @@ def add_comment(request, pk):
     return render(request, template_name, {'article': article,
                                            'comment_form': comment_form})
 
-
+@login_required()
 def add_comment_reply(request, pk):
     template_name = 'commentapp/comment_form.html'
     comment = Comment.objects.get(pk=pk)
