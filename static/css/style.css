@@ -336,10 +336,10 @@ svg {
 }
 
 .section-name h1 {
-    color: #333333;
+    color: #303b44;
     font-size: 1.24375rem;
     font-weight: 700;
-    line-height: 1.75rem;
+    line-height: 3rem;
 }
 
 .tabs-wrapper {
@@ -596,6 +596,12 @@ svg {
     font-weight: bold;
 }
 
+.comment {
+    border:1px solid #EAEAEA;
+    margin: 15px 0px;
+    padding: 10px;
+}
+
 .search-container {
     width: 100%
 }
@@ -713,4 +719,12 @@ svg {
 
 .search-p {
   font-size: 14px;
+}
+
+.login {
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid #303b44;
+    border-radius: 5px;
+    background-color: #eceaea
 }

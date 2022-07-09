@@ -5,11 +5,13 @@
     <form class="form-horizontal" action="{% url 'auth:login' %}" method="POST">
         {% csrf_token %}
         {{ login_form.as_p }}
-        <input type="submit" class="btn btn-primary" value="Войти">
+        <div style="display: flex; justify-content: space-around;">
+        <input type="submit" class="btn btn-outline-dark" value="Войти">
+        <a class="btn btn-outline-dark" href="{% url 'auth:register' %}">Регистрация</a>
+        </div>
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}">
         {% endif %}
     </form>
     <hr>
-    <a class="btn btn-link" href="{% url 'auth:register' %}">Регистрация</a>
 {% endblock %}

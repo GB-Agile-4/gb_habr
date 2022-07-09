@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from articleapp.models import Article
 from commentapp.forms import CommentCreateForm
@@ -15,6 +16,7 @@ def comment_delete(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required()
 def add_comment(request, pk):
     template_name = 'commentapp/comment_form.html'
     article = get_object_or_404(Article, pk=pk)
