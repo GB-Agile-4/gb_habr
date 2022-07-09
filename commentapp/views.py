@@ -72,14 +72,6 @@ def add_comment_reply(request, pk):
             new_comment_reply.parent = comment
             new_comment_reply.comment_author = request.user
             new_comment_reply.save()
-
-
-            if new_comment_reply.comment_author != new_comment_reply.article.author:
-                notification = Notification(article=new_comment_reply.article,
-                                            article_author=new_comment_reply.article.author,
-                                            comment_author=new_comment_reply.comment_author)
-                notification.save()
-
             comment_form = CommentCreateForm()
 
             reply_text = new_comment_reply.body
