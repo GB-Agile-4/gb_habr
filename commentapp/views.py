@@ -42,7 +42,7 @@ def add_comment(request, pk):
             notify.send(request.user, recipient=article.author, action_object=article, description='article',
                         verb=f'Вашей статье {article.title} оставил комментарий пользователь {request.user.get_full_name()}.')
             
-            return HttpResponseRedirect(reverse('article:article_detail', args=[pk]))
+            return HttpResponseRedirect(reverse('article:article_detail', args=[article.pk]))
 
     else:
         comment_form = CommentCreateForm()
@@ -77,7 +77,7 @@ def add_comment_reply(request, pk):
             notify.send(request.user, recipient=article.author, action_object=article, description='article',
                         verb=f'На ваш комментарий к статье {article.title} оставил ответ пользователь {request.user.get_full_name()}.')
             
-            return HttpResponseRedirect(reverse('article:article_detail', args=[pk]))
+            return HttpResponseRedirect(reverse('article:article_detail', [article.pk]))
 
     else:
         comment_form = CommentCreateForm()
