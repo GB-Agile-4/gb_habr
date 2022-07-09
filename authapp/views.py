@@ -71,13 +71,19 @@ def register(request):
 
 
 def edit(request):
+    next_param = request.GET.get('next', '')
+
     if request.method == 'POST':
         edit_form = HabrUserEditForm(request.POST, request.FILES, instance=request.user)
         edit_profile_form = HabrUserProfileEditForm(request.POST, instance=request.user.habruserprofile)
 
         if edit_form.is_valid() and edit_profile_form.is_valid():
             edit_form.save()
-            return HttpResponseRedirect(reverse('auth:edit'))
+
+            if 'next' in request.POST:
+                return HttpResponseRedirect(request.POST['next'])
+
+            return HttpResponseRedirect(reverse('user:account', args=[request.user.username]))
 
     else:
         edit_form = HabrUserEditForm(instance=request.user)
