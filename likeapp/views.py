@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from notifications.signals import notify
 
 from commentapp.models import Comment
 from .models import Mark, CommentMark
@@ -25,16 +26,23 @@ def add_like(request, pk):
                 user_mark = Mark(habruser=request.user, marked_article=article, mark='like')
                 user_mark.save()
                 article.likes += 1
+
+                notify.send(request.user, recipient=article.author, action_object=article, description='article',
+                            verb=f'Ваша статья {article.title} понравилась пользователю {request.user.get_full_name()}.')
+
                 article.dislikes -= 1
         else:
             user_mark = Mark(habruser=request.user, marked_article=article, mark='like')
             user_mark.save()
             article.likes += 1
 
+            notify.send(request.user, recipient=article.author, action_object=article, description='article',
+                        verb=f'Ваша статья {article.title} понравилась пользователю {request.user.get_full_name()}.')
+
         article.rating = article.likes - article.dislikes
         article.save()
 
-    return HttpResponseRedirect(reverse('article:article_detail', args=(pk, )))
+    return HttpResponseRedirect(reverse('article:article_detail', args=(pk,)))
 
 
 @login_required()
@@ -63,7 +71,7 @@ def add_dislike(request, pk):
         article.rating = article.likes - article.dislikes
         article.save()
 
-    return HttpResponseRedirect(reverse('article:article_detail', args=(pk, )))
+    return HttpResponseRedirect(reverse('article:article_detail', args=(pk,)))
 
 
 @login_required()
@@ -86,11 +94,18 @@ def comment_like(request, pk):
                 comment.likes += 1
                 comment.dislikes -= 1
                 comment.save()
+
+                notify.send(request.user, recipient=comment.comment_author, action_object=comment.article, description='article',
+                            verb=f'Ваш комментарий к статье {comment.article.title} понравился пользователю {request.user.get_full_name()}.')
         else:
             user_mark = CommentMark(habruser=request.user, marked_comment=comment, mark='like')
             user_mark.save()
             comment.likes += 1
             comment.save()
+
+            notify.send(request.user, recipient=comment.comment_author, action_object=comment.article,
+                        description='article',
+                        verb=f'Ваш комментарий к статье {comment.article.title} понравился пользователю {request.user.get_full_name()}.')
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

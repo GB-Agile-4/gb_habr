@@ -60,10 +60,6 @@
                     </div>
                     <div>
                     <br>
-                    <i style="color:#fa8e47" class="fa fa-bell fa-1x"></i>
-                    {% with article.notifications.count as unread %}
-                        <span style="color:#fa8e47" class="lead">{{ unread }}</span>
-                    {% endwith %}
                     </div>
                     <div>
                         {% if user == article.author %}
