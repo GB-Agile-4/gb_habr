@@ -45,9 +45,9 @@ INSTALLED_APPS = [
     'likeapp',
     'commentapp',
     'moderapp',
-    'notificationapp',
 
     'django_editorjs',
+    'notifications',
 ]
 
 AUTH_USER_MODEL = 'authapp.HabrUser'

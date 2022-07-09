@@ -109,7 +109,6 @@ html, body {
 .main-user-bar {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
 }
 
 .main-user-bar .main-user-item:last-of-type {
