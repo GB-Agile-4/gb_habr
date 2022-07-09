@@ -76,7 +76,7 @@
                     </p>
                     {% if user == comment_reply.comment_author or user.is_staff %}
                     <a class="pa-button-profile" style="background-color: #ff0000; width: 100px;"
-                       href="{% url 'comment:delete' comment.pk %}">
+                       href="{% url 'comment:delete' comment_reply.pk %}">
                         Удалить
                     </a>
                     {% endif %}
@@ -106,17 +106,7 @@
                 АВТОРИЗУЙТЕСЬ >>
             </a>
             {% endif %}
-            <td width="50%">
-                {% if comment.comment_author == user or user.is_staff %}
-                <button type="button" class="btn btn-outline-danger" style="float: right;"
-                        data-toggle="modal" data-target="#delete_comment">
-                    Удалить
-                </button>
-                {% include 'articleapp/includes/inc_comment_delete.html' %}
-                {% endif %}
-            </td>
-            </tr>
-            </table>
+
         </div>
 
     </div>
