@@ -23,10 +23,6 @@ def add_comment(request, pk):
     template_name = 'commentapp/comment_form.html'
     article = get_object_or_404(Article, pk=pk)
 
-    def add_comment(request, pk):
-    template_name = 'commentapp/comment_form.html'
-    article = get_object_or_404(Article, pk=pk)
-
     if request.method == 'POST':
         if request.user.is_banned:
             return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
@@ -45,9 +41,8 @@ def add_comment(request, pk):
 
             notify.send(request.user, recipient=article.author, action_object=article, description='article',
                         verb=f'Вашей статье {article.title} оставил комментарий пользователь {request.user.get_full_name()}.')
-
-
-        return HttpResponseRedirect(reverse('article:article_detail', args=[pk]))
+            
+            return HttpResponseRedirect(reverse('article:article_detail', args=[pk]))
 
     else:
         comment_form = CommentCreateForm()
@@ -55,7 +50,7 @@ def add_comment(request, pk):
     return render(request, template_name, {'article': article,
                                            'comment_form': comment_form})
 
-@login_required()
+
 def add_comment_reply(request, pk):
     template_name = 'commentapp/comment_form.html'
     comment = Comment.objects.get(pk=pk)
@@ -81,13 +76,11 @@ def add_comment_reply(request, pk):
 
             notify.send(request.user, recipient=article.author, action_object=article, description='article',
                         verb=f'На ваш комментарий к статье {article.title} оставил ответ пользователь {request.user.get_full_name()}.')
-
-
+            
             return HttpResponseRedirect(reverse('article:article_detail', args=[pk]))
 
     else:
         comment_form = CommentCreateForm()
 
     return render(request, template_name, {'article': article,
-                                           'comment': comment,
                                            'comment_form': comment_form})
