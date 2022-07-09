@@ -8,17 +8,18 @@
         {% if habr_user == user and habr_user.is_banned %}
         <p style="color: red; font-weight: bolder;">Вас забанили!<br>
             Вы больше не можете публиковать статьи и писать комментарии!<br>
-            Просьба обратиться к администрации!
+            Просьба обратиться к администрации!<br>
+            Дней до окончания блокировки: {{ ban_expires }}
         </p>
         {% else %}
-        <div style="margin: 20px">
+        <div style="margin: 20px; display: flex; justify-content: space-between;">
             {% if habr_user == user %}
             <span>Ваши публикации</span>
             <span>
-                <a class="pa-button-article" href="{% url 'article:post' %}">
+                <a class="btn btn-outline-dark" href="{% url 'article:post' %}">
                     Добавить публикацию
                 </a>
-            </span>
+            </>
             {% else %}
             <span>Публикации пользователя</span>
             {% endif %}
@@ -29,37 +30,58 @@
             <article class="articles-list-item">
                 <div class="article-snippet">
                     <div class="article-snippet-meta">
-                        <span>{{article.created_at}}</span>
+                        <span class="article-snippet-published">
+                            <time>{{ article.created_at }}</time>
+                        </span>
                     </div>
                     <h2 class="article-snippet-title">
-                        <a href="{% url 'article:article_detail' article.pk %}"
-                           class="article-snippet-title-link">{{ article.title }}</a>
+                        <a href=" {% url 'article:article_detail' article.pk %}"
+                           class="article-snippet-title-link">{{ article.title }}
+                        </a>
                     </h2>
-
-                    <section id="{{ article.id }}"></section>
+                    <section id={{ article.id }}></section>
                     {% include 'articleapp/includes/article_body_script_preview.html' %}
-                    <span>Статус:</span>
-                    {% if article.is_moderated %}
-                    <span style="color: green"> Опубликован.</span>
-                    {% endif %}
-                    {% if article.reject_moderation %}
-                    <span style="color: red"> Модерация не пройдена.</span>
-                    <a class="pa-button-article" href="{% url 'article:edit' article.pk %}">
-                        Исправить
-                    </a>
-                    {% endif %}
-                    {% if not article.is_moderated and not article.reject_moderation%}
-                    <span> На модерации.</span>
-                    {% endif %}
+                </div>
+                <div class="article-icons" style="display: flex; justify-content: space-between;">
+                    <div>
+                        <span>Статус:</span>
+                        {% if article.is_moderated %}
+                        <span style="color: green"> Опубликован.</span>
+                        {% endif %}
+                        {% if article.reject_moderation %}
+                        <span style="color: red"> Модерация не пройдена.</span>
+                        <a class="pa-button-article" href="{% url 'article:edit' article.pk %}">
+                            Исправить
+                        </a>
+                        {% endif %}
+                        {% if not article.is_moderated and not article.reject_moderation%}
+                        <span> На модерации.</span>
+                        {% endif %}
+                    </div>
+                    <div>
+                    <br>
+                    </div>
+                    <div>
+                        {% if user == article.author %}
+                        <a class="btn btn-outline-secondary"
+                           href="{% url 'article:edit' article.pk %}">Редактировать</a>
+                        {% endif %}
 
+                        {% if user.is_staff or user == article.author %}
+                        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                data-target="#delete_article">
+                            Удалить
+                        </button>
+                        {% include 'articleapp/includes/inc_article_delete.html' %}
+                        {% endif %}
+                    </div>
                 </div>
             </article>
             {% empty %}
             <div class="articles-list-item"> Публикации отсутствуют!</div>
             {% endfor %}
-            </article>
         </div>
         {% endif %}
     </div>
-    {% endblock %}
 </div>
+{% endblock %}

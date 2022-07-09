@@ -5,7 +5,8 @@
     <div class="article-snippet">
         <div class="article-snippet-meta">
             <a class="article-snippet-userpic">
-                <img src="{{ article.author.avatar|default_avatar }}" alt="">
+                <img style="border-radius: 50%;"
+                     src="{{ article.author.avatar|default_avatar }}" alt="">
             </a>
             <a href=" {% url 'user:account' article.author.username %}"
                class="article-snippet-author">{{ article.author }}

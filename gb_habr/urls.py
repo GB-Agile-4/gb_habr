@@ -4,8 +4,9 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 
-from mainapp import views as mainapp
 from articleapp import views as articleapp
+
+import notifications.urls
 
 
 urlpatterns = [
@@ -21,7 +22,7 @@ urlpatterns = [
     path('like/', include('likeapp.urls', namespace='like')),
     path('moder/', include('moderapp.urls', namespace='moder')),
     path('comment/', include('commentapp.urls', namespace='comment')),
-
+    path('notifications/', include(notifications.urls, namespace='notifications')),
 ]
 
 if settings.DEBUG:

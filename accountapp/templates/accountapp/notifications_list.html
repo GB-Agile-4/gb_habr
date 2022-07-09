@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pa-page-wrapper">
+    <div class="pa-page-articles-date">
+        <div style="margin: 20px">
+            <span>Уведомления</span>
+            <hr>
+            <div>
+                {% for notification in notifications %}
+                <div>
+                    <p> {{ notification.verb }}
+                    {% if notification.description == 'article' %}
+                        <br>
+                        <a href="{% url 'article:article_detail' notification.action_object_object_id %}"> Перейти на статью</a>
+                    {% endif %}
+                    </p>
+                    <p> {{ notification.timestamp }} </p>
+                    <a class="btn btn-outline-success" href="{% url 'user:notifications-delete' notification.pk %}">прочитано</a>
+                </div>
+                <hr>
+                {% empty %}
+                <span>нет новых уведомлений</span>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

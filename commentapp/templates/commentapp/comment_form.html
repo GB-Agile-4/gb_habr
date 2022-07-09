@@ -2,33 +2,25 @@
 {% load static %}
 
 {% block content %}
-    <!--Контент страницы-->
-    <article class="content">
-        {% block feed %}
-            <div class="articles-list">
-                <div class="articles-list-item">
-                    <div class="article-snippet">
-                        <p>Ваш комментарий к статье "{{ article.title }}":</p>
-                        <br>
-                                <div class="">
-                                    <form method="POST" enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        {{ comment_form.as_p }}
-                                        <br>
-                                            <input class="submit-button" type="submit" value="Опубликовать">
-                                        <br>
-                                        <br>
-                                    </form>
-                                    <a class= "" style="" href="/article/{{article.pk}}/">
-                                        << Вернуться к статье
-                                    </a>
-                                </div>
-                    </div>
+            <div class="login" style="width: 700px; padding: 3% 3%;">
+                <div class="text-center head">
+                    {% if request.resolver_match.url_name == 'add_reply' %}
+                    <p>Ответ на комментарий: {{comment.body}}</p>
+                    {% else %}
+                    <p>Комментарий к посту: {{article.title}}</p>
+                    {% endif %}
                 </div>
+                <form class="form-horizontal" action="." method="post">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                    <div style="display: flex; justify-content: space-between;">
+                        <input class="btn btn-primary" type="submit" value="Отправить">
+                        <a class="btn btn-outline-danger" style="" href="/article/{{article.pk}}/">
+                            Вернуться к статье
+                        </a>
+                    </div>
+                </form>
+                <hr>
             </div>
-        {% endblock %}
-    </article>
-    {% block sidebox %}
-        {% include 'mainapp/includes/inc_side-box.html' %}
-    {% endblock %}
 {% endblock %}
