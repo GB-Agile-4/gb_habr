@@ -11,13 +11,23 @@
                         <p>Ваш комментарий к статье "{{ article.title }}":</p>
                         <br>
                                 <div class="">
-                                    <form method="POST" enctype="multipart/form-data">
+<!--                                    <form method="POST" enctype="multipart/form-data">-->
+<!--                                        {% csrf_token %}-->
+<!--                                        {{ comment_form.as_p }}-->
+<!--                                        <br>-->
+<!--                                            <input class="submit-button" type="submit" value="Опубликовать">-->
+<!--                                        <br>-->
+<!--                                        <br>-->
+<!--                                    </form>-->
+
+                                    <h5>Replay</h5>
+                                    <form action="." method="post">
                                         {% csrf_token %}
                                         {{ comment_form.as_p }}
-                                        <br>
-                                            <input class="submit-button" type="submit" value="Опубликовать">
-                                        <br>
-                                        <br>
+
+                                        <!-- Hidden input for parent comment.id -->
+                                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                        <input class="btn btn-primary" type="submit" value="Replay">
                                     </form>
                                     <a class= "" style="" href="/article/{{article.pk}}/">
                                         << Вернуться к статье
