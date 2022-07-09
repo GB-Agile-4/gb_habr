@@ -2,7 +2,6 @@ from django.db import models
 
 from articleapp.models import Article
 from authapp.models import HabrUser
-# from notificationapp.models import Notification
 
 
 class Comment(models.Model):
