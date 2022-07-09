@@ -23,6 +23,10 @@ def add_comment(request, pk):
     template_name = 'commentapp/comment_form.html'
     article = get_object_or_404(Article, pk=pk)
 
+    def add_comment(request, pk):
+    template_name = 'commentapp/comment_form.html'
+    article = get_object_or_404(Article, pk=pk)
+
     if request.method == 'POST':
         if request.user.is_banned:
             return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
@@ -32,11 +36,6 @@ def add_comment(request, pk):
             new_comment.article = article
             new_comment.comment_author = request.user
             new_comment.save()
-
-            if new_comment.comment_author != new_comment.article.author:
-                notification = Notification(article=new_comment.article, article_author=new_comment.article.author,comment_author=new_comment.comment_author)
-                notification.save()
-
             comment_form = CommentCreateForm()
 
             comment_text = new_comment.body
