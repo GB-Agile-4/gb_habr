@@ -1,5 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% load my_tags %}
 
 {% block content %}
 <div class="pa-page-wrapper">
@@ -21,9 +22,9 @@
                 </div>
             </article>
                         <a href="{% url 'moderapp:confirm_moderate_post' article.pk %}"
-                           class="pa-button-profile">Подтвердить</a>
+                           class="btn btn-outline-success">Подтвердить</a>
                         <a href="{% url 'moderapp:reject_moderate_post' article.pk %}"
-                           class="pa-button-profile">Отклонить</a>
+                           class="btn btn-outline-danger">Отклонить</a>
                     </div>
                 </div>
             </div>

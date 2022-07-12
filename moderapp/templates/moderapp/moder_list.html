@@ -1,5 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+{% load my_tags %}
 
 {% block content %}
 <div class="pa-page-wrapper">
@@ -13,8 +14,9 @@
                 <div class="articles-list-item">
                     <div class="article-snippet">
                         <div class="article-snippet-meta">
-                            <a class="article-snippet-userpic"><img src="{{ MEDIA_URL }}{{ article.author.avatar }}"
-                                                                    alt=""></a>
+                            <a class="article-snippet-userpic">
+                                <img src="{{ article.author.avatar|default_avatar }}" alt="">
+                            </a>
                             <a href=" {% url 'user:account' article.author.username %}" class="article-snippet-author">
                                 {{ article.author }}
                             </a>
@@ -24,7 +26,7 @@
                         </div>
                         <h2 class="article-snippet-title">{{ article.title }}</h2>
                         <a href="{% url 'moderapp:moderate_post' article.pk %}"
-                           class="pa-button-profile">Проверить</a>
+                           class="btn btn-outline-dark">Проверить</a>
                     </div>
                 </div>
 
