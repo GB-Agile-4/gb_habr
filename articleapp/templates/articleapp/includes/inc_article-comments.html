@@ -32,7 +32,7 @@
                             <span class="lead" style="color:#000000">{{ comment.dislikes }}</span>
                         </td>
                         <td width="50%">
-                            {% if user.is_authenticated and user != comment.comment_author and not comment.parent.id %}
+                            {% if user != comment.comment_author and not comment.parent.id %}
                             <a class="btn btn-outline-secondary" style="float: right;"
                                href="{% url 'comment:add_reply' comment.pk %}">
                                 Ответить
@@ -70,7 +70,7 @@
                             <span class="lead" style="color:#000000">{{ comment.dislikes }}</span>
                         </td>
                         <td width="50%">
-                            {% if user.is_authenticated and user != comment_reply.comment_author %}
+                            {% if user != comment_reply.comment_author %}
                             <a class="btn btn-outline-secondary" style="float: right;"
                                href="{% url 'comment:add_reply' comment_reply.pk %}">
                                 Ответить
@@ -94,18 +94,11 @@
             <p>Пока комментариев нет</p>
             {% endfor %}
 
-            {% if user.is_authenticated %}
+
             <a class="btn btn-outline-secondary"
                href="{% url 'comment:add' article.pk %}">
                 Добавить комментарий
             </a>
-            {% else %}
-            <a href=" {% url 'auth:login' %}?next={% firstof request.path '/' %}">
-                Для добавления комментария
-                <br>
-                АВТОРИЗУЙТЕСЬ >>
-            </a>
-            {% endif %}
             </tr>
             </table>
         </div>

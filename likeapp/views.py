@@ -14,6 +14,10 @@ def add_like(request, pk):
     article = get_object_or_404(Article, pk=pk)
 
     if request.user.is_authenticated and request.user != article.author:
+
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+
         user_mark = Mark.objects.filter(habruser=request.user, marked_article=article).first()
 
         if user_mark:
@@ -50,6 +54,10 @@ def add_dislike(request, pk):
     article = get_object_or_404(Article, pk=pk)
 
     if request.user.is_authenticated and request.user != article.author:
+
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+
         user_mark = Mark.objects.filter(habruser=request.user, marked_article=article).first()
 
         if user_mark:
@@ -79,6 +87,10 @@ def comment_like(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
 
     if request.user.is_authenticated and request.user != comment.comment_author:
+
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+
         user_mark = CommentMark.objects.filter(habruser=request.user, marked_comment=comment).first()
 
         if user_mark:
@@ -115,6 +127,10 @@ def comment_dislike(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
 
     if request.user.is_authenticated and request.user != comment.comment_author:
+
+        if request.user.is_banned:
+            return HttpResponseRedirect(reverse('accountapp:account', args=[request.user.username]))
+
         user_mark = CommentMark.objects.filter(habruser=request.user, marked_comment=comment).first()
 
         if user_mark:
