@@ -19,6 +19,8 @@ def articles_read_now():
     articles_read_now = Article.objects.filter(is_active=True,
                                                is_moderated=True,
                                                created_at__gt=seven_days).order_by('-views')[:5]
+
+    print(seven_days, articles_read_now)
     return articles_read_now
 
 
