@@ -13,7 +13,9 @@
             {% if not comment.parent.id %}
             <div class="comment">
                 <h5 class="info">
-                    {{ comment.comment_author }}
+                    <a href=" {% url 'user:account' comment.comment_author.username %}"
+                         class="article-snippet-author">{{ comment.comment_author }}
+                    </a>
                     {{ comment.updated_at}}
                 </h5>
                 <p>
@@ -51,7 +53,9 @@
                 {% if comment_reply %}
                 <div class="comment">
                     <h5 class="info">
-                    {{ comment_reply.comment_author }}
+                    <a href=" {% url 'user:account' comment_reply.comment_author.username %}"
+                         class="article-snippet-author">{{ comment_reply.comment_author }}
+                    </a>
                     {{ comment_reply.updated_at}}
                 </h5>
                 <p>
@@ -63,11 +67,11 @@
                             <a class="btn" href="{% url 'like:comment_like' comment_reply.pk %}">
                                 <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x"></i>
                             </a>
-                            <span class="lead">{{ comment.likes }}</span>
+                            <span class="lead">{{ comment_reply.likes }}</span>
                             <a class="btn" href="/like/comment_dislike/{{ comment_reply.pk }}">
                                 <i style="color:#000000" class="fa fa-thumbs-o-up fa-1x fa-rotate-180"></i>
                             </a>
-                            <span class="lead" style="color:#000000">{{ comment.dislikes }}</span>
+                            <span class="lead" style="color:#000000">{{ comment_reply.dislikes }}</span>
                         </td>
                         <td width="50%">
                             {% if user != comment_reply.comment_author %}
