@@ -35,15 +35,14 @@ def add_comment(request, pk):
             comment_form = CommentCreateForm()
 
             comment_text = new_comment.body
-            if comment_text.startswith('@moderator'):
-                notify.send(request.user, recipient=HabrUser.objects.filter(is_staff=True), action_object=article, description='article',
-                            verb=f'Жалоба на статью {article.title} от пользователя {request.user.get_full_name()}.')
+            if request.user != article.author:
+                if comment_text.startswith('@moderator'):
+                    notify.send(request.user, recipient=HabrUser.objects.filter(is_staff=True), action_object=article, description='article',
+                                verb=f'Жалоба на статью {article.title} от пользователя {request.user.get_full_name()}.')
 
-            notify.send(request.user, recipient=article.author, action_object=article, description='article',
-                        verb=f'Вашей статье {article.title} оставил комментарий пользователь {request.user.get_full_name()}.')
+                notify.send(request.user, recipient=article.author, action_object=article, description='article',
+                            verb=f'Вашей статье {article.title} оставил комментарий пользователь {request.user.get_full_name()}.')
 
-            print(article.pk)
-            
             return HttpResponseRedirect(reverse('article:article_detail', args=[article.pk]))
 
     else:
@@ -75,16 +74,15 @@ def add_comment_reply(request, pk):
             comment_form = CommentCreateForm()
 
             reply_text = new_comment_reply.body
-            if reply_text.startswith('@moderator'):
-                notify.send(request.user, recipient=HabrUser.objects.filter(is_staff=True), action_object=article,
-                            description='article',
-                            verb=f'Жалоба на комментарий к статье {article.title} от пользователя {request.user.get_full_name()}.')
+            if request.user != article.author:
+                if reply_text.startswith('@moderator'):
+                    notify.send(request.user, recipient=HabrUser.objects.filter(is_staff=True), action_object=article,
+                                description='article',
+                                verb=f'Жалоба на комментарий к статье {article.title} от пользователя {request.user.get_full_name()}.')
 
-            notify.send(request.user, recipient=article.author, action_object=article, description='article',
-                        verb=f'На ваш комментарий к статье {article.title} оставил ответ пользователь {request.user.get_full_name()}.')
+                notify.send(request.user, recipient=article.author, action_object=article, description='article',
+                            verb=f'На ваш комментарий к статье {article.title} оставил ответ пользователь {request.user.get_full_name()}.')
 
-            print(article.pk)
-            
             return HttpResponseRedirect(reverse('article:article_detail', args=[article.pk]))
 
     else:
