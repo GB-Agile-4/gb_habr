@@ -4,8 +4,7 @@ import json
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 
-from mainapp.models import ArticleCategory
-from articleapp.models import Article
+from articleapp.models import Article, ArticleCategory
 
 User = get_user_model()
 
