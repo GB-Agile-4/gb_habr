@@ -127,3 +127,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 LOGIN_URL = '/auth/login/'
+
+try:
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *
